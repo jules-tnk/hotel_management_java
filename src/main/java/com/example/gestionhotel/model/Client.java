@@ -7,7 +7,7 @@ public class Client extends Person {
 
     static Connection connection = null;
     static Statement statement = null;
-    static ResultSet resultSet      ;
+    static ResultSet resultSet ;
     static ResultSetMetaData metaData ;
     String resultat = "";
 
