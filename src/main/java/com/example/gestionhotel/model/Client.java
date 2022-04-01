@@ -18,6 +18,6 @@ public class Client extends Person {
             resultSet = statement.executeQuery("SELECT * FROM booking");
             metaData = resultSet.getMetaData();
             System.out.println(metaData);
-            System.out.println("Sucess!!!");
+            System.out.println("Sucess!!!!");
     }
 }
