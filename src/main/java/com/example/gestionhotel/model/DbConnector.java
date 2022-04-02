@@ -3,6 +3,7 @@ package com.example.gestionhotel.model;
 import java.sql.*;
 
 public class DbConnector {
+    //ATTRIBUTES
     private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private final String DATABASE_URL = "jdbc:mysql://localhost/hotelmanagementdb";
     private String databaseUser = "root";
@@ -22,15 +23,14 @@ public class DbConnector {
         return this.resultSet;
     }
 
-    public boolean initializeConnection() {
+    public DbConnector() {
         try{ Class.forName(this.JDBC_DRIVER);}
-        catch (ClassNotFoundException ex){ return  false; }
+        catch (ClassNotFoundException e){ e.printStackTrace(); }
 
         try {
             this.connection = DriverManager.getConnection(this.DATABASE_URL, databaseUser, databasePassword);
             this.statement = this.connection.createStatement();
-        } catch (SQLException ex) { return false; }
+        } catch (SQLException e) { e.printStackTrace(); }
 
-        return true;
     }
 }

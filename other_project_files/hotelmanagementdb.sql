@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 02 Avril 2022 à 10:41
+-- Généré le :  Sam 02 Avril 2022 à 15:42
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -36,6 +36,13 @@ CREATE TABLE IF NOT EXISTS `client` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `client`
+--
+
+INSERT INTO `client` (`firstName`, `lastName`, `id`, `phoneNumber`, `birthDate`, `email`) VALUES
+('Rel', 'Rel', 'tl589621', 608947885, '2022-04-13', 'rel.rel@gmail.com');
+
 -- --------------------------------------------------------
 
 --
@@ -46,10 +53,17 @@ CREATE TABLE IF NOT EXISTS `room` (
   `id` varchar(45) NOT NULL,
   `type` varchar(45) NOT NULL,
   `price` double NOT NULL,
-  `availablity` tinyint(1) NOT NULL,
+  `available` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   FULLTEXT KEY `type` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `room`
+--
+
+INSERT INTO `room` (`id`, `type`, `price`, `available`) VALUES
+('c32', 'simple', 1000, 1);
 
 -- --------------------------------------------------------
 
@@ -58,6 +72,7 @@ CREATE TABLE IF NOT EXISTS `room` (
 --
 
 CREATE TABLE IF NOT EXISTS `transaction` (
+  `id_transaction` varchar(45) NOT NULL,
   `id_client` varchar(45) NOT NULL,
   `id_receptionnist` varchar(45) NOT NULL,
   `id_room` varchar(45) NOT NULL,
@@ -69,6 +84,13 @@ CREATE TABLE IF NOT EXISTS `transaction` (
   KEY `id_receptionnist` (`id_receptionnist`),
   KEY `room_fk` (`id_room`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `transaction`
+--
+
+INSERT INTO `transaction` (`id_transaction`, `id_client`, `id_receptionnist`, `id_room`, `date`, `nature`, `price`) VALUES
+('p45', 'tl589621', 'eb416362', 'c32', '2022-04-02', 'prise', 2000);
 
 -- --------------------------------------------------------
 
@@ -103,8 +125,8 @@ INSERT INTO `worker` (`firstName`, `lastName`, `id`, `phoneNumber`, `birthDate`,
 -- Contraintes pour la table `transaction`
 --
 ALTER TABLE `transaction`
-  ADD CONSTRAINT `room_fk` FOREIGN KEY (`id_room`) REFERENCES `room` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `client_fk` FOREIGN KEY (`id_client`) REFERENCES `client` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `room_fk` FOREIGN KEY (`id_room`) REFERENCES `room` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `worker_fk` FOREIGN KEY (`id_receptionnist`) REFERENCES `worker` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
