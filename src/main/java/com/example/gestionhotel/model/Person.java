@@ -1,4 +1,5 @@
 package com.example.gestionhotel.model;
+import java.sql.*;
 
 public class Person {
     protected String firstName;
@@ -6,7 +7,7 @@ public class Person {
     protected  String id;
     protected String email;
     protected  int phoneNumber;
-    protected String birthDate;
+    protected Date birthDate;
 
     public String getFirstName() {
         return firstName;
@@ -48,11 +49,11 @@ public class Person {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
     public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
+        this.birthDate = Date.valueOf(birthDate);
     }
 }
