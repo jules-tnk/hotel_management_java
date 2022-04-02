@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 01 Avril 2022 à 22:33
+-- Généré le :  Sam 02 Avril 2022 à 10:41
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `room` (
   `id` varchar(45) NOT NULL,
   `type` varchar(45) NOT NULL,
   `price` double NOT NULL,
+  `availablity` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   FULLTEXT KEY `type` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
