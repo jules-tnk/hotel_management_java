@@ -9,12 +9,12 @@ public class Client extends Person {
         ResultSet result = clientDbConnector.executeRequest(request);
         try {
             while (result.next()) {
-                this.setId(result.getString("id"));
-                this.setFirstName(result.getString("firstName"));
-                this.setLastName(result.getString("lastName"));
-                this.setEmail(result.getString("email"));
-                this.setBirthDate(String.valueOf(result.getDate("birthDate")));
-                this.setPhoneNumber(result.getInt("phoneNumber"));
+                setId(result.getString("id"));
+                setFirstName(result.getString("firstName"));
+                setLastName(result.getString("lastName"));
+                setEmail(result.getString("email"));
+                setBirthDate(String.valueOf(result.getDate("birthDate")));
+                setPhoneNumber(result.getInt("phoneNumber"));
             }
         } catch (SQLException e){
             e.printStackTrace();
