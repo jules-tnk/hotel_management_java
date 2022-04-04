@@ -15,6 +15,7 @@ public class Transaction {
     private String nature;
     private String date;
     private double price;
+    //private int numberOfDays;
 
     //GETTERS
     public String getId_client() {

@@ -47,6 +47,21 @@ public class Worker extends Person {
         }
     }
 
+    //METHODS
+    public void addClient(/*infos du client*/){}
+
+    public void deleteClient(/*id du client*/){}
+
+    public void updateClient(/*id du lient et nouvelles infos*/){}
+
+    public void addTransaction(/*infos de la transaction*/){}
+
+    public void updateTransaction(/*id de la transaction et nouvelles infos*/){}
+
+    public void deleteTransaction(/*id de la transaction*/){}
+
+    public void setRoomAvailablity(/*id de la chmabre et nouvelle infos*/){}
+
     public static void main(String[] args) {
         Worker worker = new Worker("eb416362");
         System.out.println(worker.getFirstName());
