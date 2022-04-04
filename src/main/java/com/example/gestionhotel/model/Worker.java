@@ -60,7 +60,7 @@ public class Worker extends Person {
 
     public void deleteTransaction(/*id de la transaction*/){}
 
-    public void setRoomAvailablity(/*id de la chmabre et nouvelle infos*/){}
+    public void setRoomAvailablity(/* id de la chmabre et nouvelle infos*/){}
 
     public static void main(String[] args) {
         Worker worker = new Worker("eb416362");
