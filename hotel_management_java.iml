@@ -36,5 +36,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.8.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.8.1" level="project" />
     <orderEntry type="library" name="kordamp.ikonli.javafx1" level="project" />
+    <orderEntry type="library" name="wisdom.framework.mysql.connector.java" level="application" />
   </component>
 </module>

@@ -48,7 +48,10 @@ public class Worker extends Person {
     }
 
     //METHODS
-    public void addClient(/*infos du client*/){}
+    public void addClient(/*info du client*/){
+        String request = "";
+        ResultSet result = workerDbConnector.executeRequest(request);
+    }
 
     public void deleteClient(/*id du client*/){}
 
