@@ -4,10 +4,13 @@ import java.sql.*;
 
 public class DbConnector {
     //ATTRIBUTES
+    //private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    //private final String DATABASE_URL = "jdbc:mysql://localhost/hotelmanagementdb";
+
     private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private final String DATABASE_URL = "jdbc:mysql://localhost/hotelmanagementdb";
-    private String databaseUser = "root";
-    private String databasePassword = "";
+    private final String DATABASE_URL = "jdbc:mysql://sql11.freemysqlhosting.net/sql11483850";
+    private String databaseUser = "sql11483850";
+    private String databasePassword = "ErgYgPmb4i";
 
     private Connection connection = null;
     private Statement statement = null;
