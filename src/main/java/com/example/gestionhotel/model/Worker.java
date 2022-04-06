@@ -27,7 +27,7 @@ public class Worker extends Person {
         this.password = password;
     }
 
-    //CONSTRUCTOR
+    //CONSTRUCTORS
     public Worker(String worker_id) {
         String request = String.format("SELECT * FROM worker WHERE id=\"%s\";", worker_id);
         ResultSet result = workerDbConnector.executeRequest(request);
@@ -46,6 +46,7 @@ public class Worker extends Person {
             e.printStackTrace();
         }
     }
+
 
     //METHODS
     public void addClient(/*info du client*/){

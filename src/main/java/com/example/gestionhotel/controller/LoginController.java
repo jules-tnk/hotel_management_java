@@ -2,6 +2,7 @@ package com.example.gestionhotel.controller;
 
 import com.example.gestionhotel.Main;
 import com.example.gestionhotel.model.DbConnector;
+import com.example.gestionhotel.model.Worker;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,14 +20,12 @@ public class LoginController extends Application {
     public void Login(String username, String password){
         String savedPassword = "";
         String savedFunction = "";
-        String savedId = "";
 
         //Send request to database
         String request = String.format("SELECT * FROM worker WHERE id=\"%s\";",username);
         ResultSet result = loginDbConnector.executeRequest(request);
         try {
             while (result.next()) {
-                System.out.println("User found...");
                 //retrieve information from the request's results
                 savedPassword = result.getString("password");
                 savedFunction = result.getString("function");
@@ -40,11 +39,46 @@ public class LoginController extends Application {
         //Check password then the user function
         if (password.equals(savedPassword)){
             if (savedFunction.equals("admin")){
-                /*open admin view*/
+                //open admin view
                 System.out.println("Admin logged in...");
             }
             else if (savedFunction.equals("receptionist")) {
-                /*open receptionist view*/
+                //open receptionist view
+                System.out.println("Receptionist logged in...");
+            }
+        }
+        else {//password not matching
+            System.out.println("Wrong password...");
+        }
+
+    }
+
+    public void Login2(String username, String password){
+        String savedPassword = "";
+
+        //Retrieve password from database
+        String request = String.format("SELECT * FROM worker WHERE id=\"%s\";",username);
+        ResultSet result = loginDbConnector.executeRequest(request);
+        try {
+            while (result.next()) {
+                savedPassword = result.getString("password");
+            }
+        } catch (SQLException e){ e.printStackTrace(); }
+
+        //Check password
+        if (savedPassword.equals(password)){
+            //Create the worker object corresponding to the id
+            // and get his function
+            Worker workerLoggingIn = new Worker(username);
+            String workerFunction = workerLoggingIn.getFunction();
+
+            //Open the view corresponding to the user's function
+            if (workerFunction.equals("admin")){
+                //open admin view
+                System.out.println("Admin logged in...");
+            }
+            else if (workerFunction.equals("receptionist")) {
+                //open receptionist view
                 System.out.println("Receptionist logged in...");
             }
         }
