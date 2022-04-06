@@ -4,6 +4,7 @@ import java.sql.*;
 public class Client extends Person {
     DbConnector clientDbConnector = new DbConnector();
 
+
     public Client(String client_id) {
         String request = String.format("SELECT * FROM client WHERE id=\"%s\";", client_id);
         ResultSet result = clientDbConnector.executeRequest(request);
