@@ -56,6 +56,11 @@ public class Room {
         }
     }
 
+    //DATABASE METHODS
+    public void addToDatabase(){}
+    public void updateInDatabase(){}
+    public void removeFromDatabase(){}
+
     public static void main(String[] args) {
         Room room = new Room("c32");
         System.out.println(room.getId());

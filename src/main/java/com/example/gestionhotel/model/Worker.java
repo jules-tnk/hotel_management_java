@@ -47,8 +47,16 @@ public class Worker extends Person {
         }
     }
 
+    //DATABASE METHODS
+    public void addToDatabase(){}
+    public void updateInDatabase(){}
+    public void removeFromDatabase(){}
 
     //METHODS
+    public boolean Login(String username, String password){
+        return true;
+    }
+
     public void addClient(/*info du client*/){
         String request = "";
         ResultSet result = workerDbConnector.executeRequest(request);

@@ -4,7 +4,7 @@ import java.sql.*;
 public class Client extends Person {
     DbConnector clientDbConnector = new DbConnector();
 
-
+    //CONSTRUCTORS
     public Client(String client_id) {
         String request = String.format("SELECT * FROM client WHERE id=\"%s\";", client_id);
         ResultSet result = clientDbConnector.executeRequest(request);
@@ -21,6 +21,11 @@ public class Client extends Person {
             e.printStackTrace();
         }
     }
+
+    //DATABASE METHODS
+    public void addToDatabase(){}
+    public void updateInDatabase(){}
+    public void removeFromDatabase(){}
 
     public static void main(String[] args) {
         Client client = new Client("tl589621");

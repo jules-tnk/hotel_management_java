@@ -77,6 +77,11 @@ public class Transaction {
         }
     }
 
+    //DATABASE METHODS
+    public void addToDatabase(){}
+    public void updateInDatabase(){}
+    public void removeFromDatabase(){}
+
     public static void main(String[] args) {
         Transaction transaction = new Transaction("p45");
         System.out.println(transaction.getNature());

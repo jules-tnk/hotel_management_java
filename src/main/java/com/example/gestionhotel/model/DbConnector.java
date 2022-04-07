@@ -16,21 +16,21 @@ public class DbConnector {
 
     public ResultSet executeRequest(String request){
         try {
-            this.resultSet = this.statement.executeQuery(request);
+            resultSet = statement.executeQuery(request);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
-        return this.resultSet;
+        return resultSet;
     }
 
     public DbConnector() {
-        try{ Class.forName(this.JDBC_DRIVER);}
+        try{ Class.forName(JDBC_DRIVER);}
         catch (ClassNotFoundException e){ e.printStackTrace(); }
 
         try {
-            this.connection = DriverManager.getConnection(this.DATABASE_URL, databaseUser, databasePassword);
-            this.statement = this.connection.createStatement();
+            connection = DriverManager.getConnection(DATABASE_URL, databaseUser, databasePassword);
+            statement = connection.createStatement();
         } catch (SQLException e) { e.printStackTrace(); }
 
     }
