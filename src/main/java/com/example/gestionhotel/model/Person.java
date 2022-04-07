@@ -48,4 +48,15 @@ public class Person {
     public void setBirthDate(String birthDate) {
         this.birthDate = Date.valueOf(birthDate);
     }
+
+    //CONSTRUCTOR
+    public Person(String firstName, String lastName, String id, String email, int phoneNumber, Date birthDate) {
+        setFirstName(firstName);
+        setLastName(lastName);
+        setId(id);
+        setEmail(email);
+        setPhoneNumber(phoneNumber);
+        setBirthDate(String.valueOf(birthDate));
+
+    }
 }
