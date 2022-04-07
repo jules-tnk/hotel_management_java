@@ -46,6 +46,7 @@ public abstract class DbConnector {
         } catch (SQLException e) { e.printStackTrace(); }
         return password;
     }
+
     //MANAGE CLIENTS
     public static void addClient(){}
 

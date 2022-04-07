@@ -35,7 +35,33 @@ public class Worker extends Person {
     }
 
     //METHODS
+    //MANAGE CLIENTS
+    public static void addClient(){}
 
+    public static void getClient(){}
+
+    public static void removeClient(){}
+
+    public static void updateClient(){}
+
+    //MANAGE ROOM
+    public static void addRoom(){}
+
+    public static void getRoom(){}
+
+    public static void removeRoom(){}
+
+    public static void updateRoom(){}
+
+
+    //MANAGE TRANSACTIONS
+    public static void addTransaction(){}
+
+    public static void getTransaction(){}
+
+    public static void removeTransaction(){}
+
+    public static void updateTransaction(){}
 
     public static void main(String[] args) {
     }
