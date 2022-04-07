@@ -2,7 +2,7 @@ package com.example.gestionhotel.model;
 
 import java.sql.*;
 
-public class DbConnector {
+public abstract class DbConnector {
     //ATTRIBUTES
     private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private final String DATABASE_URL = "jdbc:mysql://localhost/hotelmanagementdb";
@@ -11,10 +11,10 @@ public class DbConnector {
     private String databasePassword = "";
 
     private Connection connection = null;
-    private Statement statement = null;
-    private ResultSet resultSet ;
+    private static Statement statement = null;
+    private static ResultSet resultSet ;
 
-    public ResultSet executeRequest(String request){
+    public static ResultSet executeRequest(String request){
         try {
             resultSet = statement.executeQuery(request);
         } catch (SQLException e) {
@@ -34,4 +34,44 @@ public class DbConnector {
         } catch (SQLException e) { e.printStackTrace(); }
 
     }
+
+    //MANAGE WORKERS
+        //lOGIN
+    public static String getWorkerPassword(String worker_id){
+        String request = "";
+        String password = "";
+        resultSet = executeRequest(request);
+        try {
+            password = resultSet.getString("password");
+        } catch (SQLException e) { e.printStackTrace(); }
+        return password;
+    }
+    //MANAGE CLIENTS
+    public static void addClient(){}
+
+    public static void getClient(){}
+
+    public static void removeClient(){}
+
+    public static void updateClient(){}
+
+    //MANAGE ROOM
+    public static void addRoom(){}
+
+    public static void getRoom(){}
+
+    public static void removeRoom(){}
+
+    public static void updateRoom(){}
+
+
+    //MANAGE TRANSACTIONS
+    public static void addTransaction(){}
+
+    public static void getTransaction(){}
+
+    public static void removeTransaction(){}
+
+    public static void updateTransaction(){}
+
 }
