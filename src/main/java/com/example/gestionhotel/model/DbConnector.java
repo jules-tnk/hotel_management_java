@@ -2,7 +2,7 @@ package com.example.gestionhotel.model;
 
 import java.sql.*;
 
-public abstract class DbConnector {
+public class DbConnector {
     //ATTRIBUTES
     private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private final String DATABASE_URL = "jdbc:mysql://localhost/hotelmanagementdb";
@@ -12,19 +12,21 @@ public abstract class DbConnector {
 
     private Connection connection = null;
     private static Statement statement = null;
+    private static String request;
     private static ResultSet resultSet ;
 
-    public static ResultSet executeRequest(String request){
+    public static ResultSet executeQueryRequest(String request){
+        ResultSet result;
         try {
-            resultSet = statement.executeQuery(request);
+            result = statement.executeQuery(request);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
-        return resultSet;
+        return result;
     }
 
-    public DbConnector() {
+    public DbConnector(){
         try{ Class.forName(JDBC_DRIVER);}
         catch (ClassNotFoundException e){ e.printStackTrace(); }
 
@@ -37,14 +39,41 @@ public abstract class DbConnector {
 
     //MANAGE WORKERS
         //lOGIN
+    public static boolean isWorkeRegistered(String worker_id){
+        String request = String.format("SELECT * FROM worker WHERE id=\"%s\"", worker_id);
+        ResultSetMetaData metaData;
+        resultSet = executeQueryRequest(request);
+        return (resultSet != null);
+    }
+
     public static String getWorkerPassword(String worker_id){
-        String request = "";
+        String request = String.format("SELECT password FROM worker WHERE id=\"%s\"", worker_id);
         String password = "";
-        resultSet = executeRequest(request);
+        resultSet = executeQueryRequest(request);
         try {
-            password = resultSet.getString("password");
+            while ( resultSet.next() ){
+                password = resultSet.getString("password");
+            }
         } catch (SQLException e) { e.printStackTrace(); }
         return password;
+    }
+
+    public static Worker getWorker(String worker_id) {
+        request = String.format("SELECT * FROM worker WHERE id=\"%s\"", worker_id);
+        resultSet = executeQueryRequest(request);
+        Worker worker = new Worker();
+        try {
+            while ( resultSet.next() ){
+                worker.setLastName( resultSet.getString("lastName") );
+                worker.setFirstName( resultSet.getString("firstName") );
+                worker.setFunction( resultSet.getString("function") );
+                worker.setId( resultSet.getString("id") );
+                worker.setEmail( resultSet.getString("email") );
+                worker.setPhoneNumber( resultSet.getInt("phoneNumber") );
+                worker.setBirthDate( resultSet.getDate("birthDate") );
+            }
+            return worker;
+        } catch (SQLException e){ e.printStackTrace(); return null;}
     }
 
     //MANAGE CLIENTS

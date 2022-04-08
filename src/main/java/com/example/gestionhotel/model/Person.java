@@ -10,53 +10,33 @@ public class Person {
     protected Date birthDate;
 
     //GETTERS
-    public String getFirstName() {
-        return firstName;
-    }
-    public String getLastName() {
-        return lastName;
-    }
-    public int getPhoneNumber() {
-        return phoneNumber;
-    }
-    public Date getBirthDate() {
-        return birthDate;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public String getId() {
-        return id;
-    }
+    public String getFirstName() { return firstName; }
+    public String getLastName() { return lastName; }
+    public int getPhoneNumber() { return phoneNumber; }
+    public Date getBirthDate() { return birthDate; }
+    public String getEmail() { return email; }
+    public String getId() { return id; }
 
     //SETTERS
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-    public void setBirthDate(String birthDate) {
-        this.birthDate = Date.valueOf(birthDate);
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
+    public void setId(String id) { this.id = id; }
+    public void setEmail(String email) { this.email = email; }
+    public void setPhoneNumber(int phoneNumber) { this.phoneNumber = phoneNumber; }
+    public void setBirthDate(Date birthDate) { this.birthDate = birthDate; }
+
+    //CONSTRUCTORS
+
+    public Person() {
+
     }
 
-    //CONSTRUCTOR
     public Person(String firstName, String lastName, String id, String email, int phoneNumber, Date birthDate) {
         setFirstName(firstName);
         setLastName(lastName);
         setId(id);
         setEmail(email);
         setPhoneNumber(phoneNumber);
-        setBirthDate(String.valueOf(birthDate));
-
+        setBirthDate(birthDate);
     }
 }

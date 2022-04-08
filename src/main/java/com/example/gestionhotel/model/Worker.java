@@ -26,8 +26,7 @@ public class Worker extends Person {
     }
 
     //CONSTRUCTORS
-
-
+    public Worker() {}
     public Worker(String firstName, String lastName, String id, String email, int phoneNumber, Date birthDate, String function, String password) {
         super(firstName, lastName, id, email, phoneNumber, birthDate);
         setFunction(function);
@@ -63,6 +62,26 @@ public class Worker extends Person {
 
     public static void updateTransaction(){}
 
-    public static void main(String[] args) {
+    //LOGIN
+    public boolean login(String id, String password){
+        boolean isRegistered = DbConnector.isWorkeRegistered(id);
+        if ( isRegistered ){
+            System.out.println("Registered...");
+            String savedPassword = DbConnector.getWorkerPassword(id);
+
+            if (password.equals(savedPassword)){
+                System.out.println("Correct password...");
+                Worker worker = DbConnector.getWorker(id);
+                setFirstName(worker.getFirstName());
+                setLastName(worker.getLastName());
+                setEmail(worker.getEmail());
+                setId(worker.getId());
+                setFunction(worker.getFunction());
+                setBirthDate(worker.getBirthDate());
+                setPhoneNumber(worker.getPhoneNumber());
+                return true;
+            } else { return false; }
+        }
+        else { return false; }
     }
 }
