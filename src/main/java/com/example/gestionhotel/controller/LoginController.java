@@ -32,18 +32,11 @@ public class LoginController {
 
     @FXML
     public void showAdminView(Worker admin) {
-        AdminController adminController = new AdminController(admin);
-        Stage adminStage = new Stage();
-        try { adminController.start(adminStage); }
-        catch (IOException e) { e.printStackTrace(); }
     }
 
     @FXML
     public void showReceptionistView(Worker receptionist) {
-        ReceptionistController receptionistController = new ReceptionistController(receptionist);
-        Stage receptionistStage = new Stage();
-        try { receptionistController.start(receptionistStage); }
-        catch (IOException e) { e.printStackTrace(); }
+
     }
 
 }

@@ -34,7 +34,7 @@ public class Room {
     public void setType(String type) {
         this.type = type;
     }
-    public void setAvailablity(boolean available) { this.available = available; }
+    public void setAvailability(boolean available) { this.available = available; }
 
     //CONSTRUCTOR
 
@@ -43,7 +43,7 @@ public class Room {
         setId(id);
         setPrice(price);
         setType(type);
-        setAvailablity(available);
+        setAvailability(available);
     }
 
     public static void main(String[] args) {

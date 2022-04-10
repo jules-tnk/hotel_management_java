@@ -7,8 +7,8 @@ public class DbConnector {
     private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private final String DATABASE_URL = "jdbc:mysql://localhost/hotelmanagementdb";
 
-    private String databaseUser = "root";
-    private String databasePassword = "";
+    private final String databaseUser = "root";
+    private final String databasePassword = "";
 
     private Connection connection = null;
     private static Statement statement = null;
@@ -22,6 +22,17 @@ public class DbConnector {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        }
+        return result;
+    }
+
+    public static int executeUpdateRequest(String request){
+        int result;
+        try {
+            result = statement.executeUpdate(request);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
         }
         return result;
     }
@@ -77,13 +88,16 @@ public class DbConnector {
     }
 
     //MANAGE CLIENTS
-    public static void addClient(){}
+    public static void addClient(Client client){
+        request = String.format("");
+        executeUpdateRequest(request);
+    }
 
     public static void getClient(){}
 
-    public static void removeClient(){}
+    public static void removeClient(String idClient){}
 
-    public static void updateClient(){}
+    public static void updateClient(Client client){}
 
     //MANAGE ROOM
     public static void addRoom(){}
@@ -92,7 +106,7 @@ public class DbConnector {
 
     public static void removeRoom(){}
 
-    public static void updateRoom(){}
+    public static void setRoomAvailability (){}
 
 
     //MANAGE TRANSACTIONS

@@ -1,8 +1,6 @@
 package com.example.gestionhotel.model;
 
 import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class Worker extends Person {
     //ATTRIBUTES
@@ -35,23 +33,26 @@ public class Worker extends Person {
 
     //METHODS
     //MANAGE CLIENTS
-    public static void addClient(){}
+    public static void addClient(Client client){
+        DbConnector.addClient(client);
+    }
 
     public static void getClient(){}
 
-    public static void removeClient(){}
+    public static void removeClient(String idClient){
+        DbConnector.removeClient(idClient);
+    }
 
-    public static void updateClient(){}
+    public static void updateClient(Client client){
+        DbConnector.updateClient(client);
+    }
 
     //MANAGE ROOM
-    public static void addRoom(){}
+    public static void addRoom(Room room){}
 
     public static void getRoom(){}
 
-    public static void removeRoom(){}
-
-    public static void updateRoom(){}
-
+    public static void setRoomAvailability(Room room, boolean availability){}
 
     //MANAGE TRANSACTIONS
     public static void addTransaction(){}
@@ -66,11 +67,9 @@ public class Worker extends Person {
     public boolean login(String id, String password){
         boolean isRegistered = DbConnector.isWorkeRegistered(id);
         if ( isRegistered ){
-            System.out.println("Registered...");
             String savedPassword = DbConnector.getWorkerPassword(id);
 
             if (password.equals(savedPassword)){
-                System.out.println("Correct password...");
                 Worker worker = DbConnector.getWorker(id);
                 setFirstName(worker.getFirstName());
                 setLastName(worker.getLastName());
