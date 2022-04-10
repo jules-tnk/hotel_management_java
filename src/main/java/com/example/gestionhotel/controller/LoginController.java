@@ -14,34 +14,36 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LoginController extends Application {
+public class LoginController {
     @FXML
-    public void showAdminView() throws IOException {
-        AdminController adminController = new AdminController();
+    public void login(){
+        String username = ""; //Retrive username from form
+        String password = ""; //Retrieve password from form
+        Worker workerLoggingIn = new Worker();
+        workerLoggingIn.login(username, password);
+
+        if (workerLoggingIn.getFunction().equals("admin")){
+            showAdminView(workerLoggingIn);
+        }
+        else if (workerLoggingIn.getFunction().equals("receptionist")){
+            showReceptionistView(workerLoggingIn);
+        }
+    }
+
+    @FXML
+    public void showAdminView(Worker admin) {
+        AdminController adminController = new AdminController(admin);
         Stage adminStage = new Stage();
-        adminController.start(adminStage);
+        try { adminController.start(adminStage); }
+        catch (IOException e) { e.printStackTrace(); }
     }
 
     @FXML
-    public void showReceptionistView() throws IOException {
-        ReceptionistController receptionistController = new ReceptionistController();
-        Stage receptionnistStage = new Stage();
-        receptionistController.start(receptionnistStage);
-    }
-
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(com.example.gestionhotel.Main.class.getResource("LoginView.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
-        //stage.setMaximized(true);
-        stage.setTitle("Main");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch();
+    public void showReceptionistView(Worker receptionist) {
+        ReceptionistController receptionistController = new ReceptionistController(receptionist);
+        Stage receptionistStage = new Stage();
+        try { receptionistController.start(receptionistStage); }
+        catch (IOException e) { e.printStackTrace(); }
     }
 
 }
