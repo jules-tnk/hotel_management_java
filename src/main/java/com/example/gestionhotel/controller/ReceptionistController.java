@@ -1,8 +1,10 @@
 package com.example.gestionhotel.controller;
 
 import com.example.gestionhotel.model.Client;
+import com.example.gestionhotel.model.DbConnector;
 import com.example.gestionhotel.model.Worker;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,11 +17,15 @@ import java.io.IOException;
 import java.sql.Date;
 
 public class ReceptionistController {
+    {
+        new DbConnector();
+    }
     public TextField firstNameSearchEntry;
     public TextField lastNameSearchEntry;
     public TextField emailSearchEntry;
     public TextField idClientSearchEntry;
-    Worker receptionist;
+    static Worker receptionist;
+
     //ADD
     @FXML private TextField firstNameEntry;
     @FXML private TextField lastNameEntry;
@@ -45,7 +51,7 @@ public class ReceptionistController {
     public Worker getReceptionist() { return receptionist; }
 
     //SETTER
-    public void setReceptionist(Worker receptionist) { this.receptionist = receptionist; }
+    public static void setReceptionist(Worker newReceptionist) { receptionist = newReceptionist; }
 
     @FXML
     public void addClient(){
@@ -57,13 +63,14 @@ public class ReceptionistController {
         Date birthDate = Date.valueOf(StringBirthDate);
         String idClient = idClientEntry.getText();
         Client newClient = new Client(firstName, lastName, idClient, email, phoneNumber, birthDate);
-        receptionist.addClient(newClient);
+        //receptionist.addClient(newClient);
+        DbConnector.addClient(newClient);
     }
 
     @FXML
     public void removeClient(){
         String idClientToRemove = idClientToRemoveEntry.getText();
-        receptionist.removeClient(idClientToRemove);
+        //receptionist.removeClient(idClientToRemove);
     }
 
     @FXML
@@ -76,9 +83,13 @@ public class ReceptionistController {
         Date birthDate = Date.valueOf(StringBirthDate);
         String idClient = idClientUpdateEntry.getText();
         Client updatedClient = new Client(firstName, lastName, idClient, email, phoneNumber, birthDate);
-        receptionist.updateClient(updatedClient);
+        //receptionist.updateClient(updatedClient);
     }
 
     @FXML
     public void searchClient() {}
+
+    public void testFunction(ActionEvent event) {
+        System.out.println(ReceptionistController.receptionist.getLastName());
+    }
 }

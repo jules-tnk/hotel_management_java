@@ -89,7 +89,8 @@ public class DbConnector {
 
     //MANAGE CLIENTS
     public static void addClient(Client client){
-        request = String.format("");
+        request = String.format("INSERT INTO client (id, firstName, lastName, phoneNumber, email, birthDate) VALUES(\"%s\",\"%s\",\"%s\",%s,\"%s\",\"%s\")",
+                client.getId(), client.getFirstName(), client.getLastName(), client.getPhoneNumber(), client.getEmail(), client.getBirthDate());
         executeUpdateRequest(request);
     }
 

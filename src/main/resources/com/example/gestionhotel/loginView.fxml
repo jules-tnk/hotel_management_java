@@ -24,8 +24,8 @@
    <center>
       <AnchorPane prefHeight="500.0" prefWidth="369.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="userText" layoutX="85.0" layoutY="204.0" promptText="User Name" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px;" />
-            <PasswordField fx:id="passwordText" layoutX="85.0" layoutY="254.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px;" />
+            <TextField fx:id="userNameEntry" layoutX="85.0" layoutY="204.0" promptText="User Name" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px;" />
+            <PasswordField fx:id="passwordEntry" layoutX="85.0" layoutY="254.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px;" />
             <Hyperlink layoutX="100.0" layoutY="448.0" text="You Forgot Password ?" underline="true" />
             <Text layoutX="111.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome !" wrappingWidth="120.9456787109375">
                <font>
@@ -47,7 +47,7 @@
                   <Image url="@./images/1077114.png" />
                </image>
             </ImageView>
-            <Button layoutX="120.0" layoutY="332.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="82.0" style="-fx-background-color: #0589ff;" text="Login" textFill="WHITE" />
+            <Button layoutX="120.0" layoutY="332.0" mnemonicParsing="false" onAction="#login" prefHeight="31.0" prefWidth="82.0" style="-fx-background-color: #0589ff;" text="Login" textFill="WHITE" />
          </children>
       </AnchorPane>
    </center>

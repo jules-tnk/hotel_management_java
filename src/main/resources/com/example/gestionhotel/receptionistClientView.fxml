@@ -62,7 +62,7 @@
                                                 <TextField fx:id="firstNameEntry" layoutX="56.0" layoutY="94.0" prefHeight="19.0" prefWidth="151.0" promptText="First Name" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 0px 0px 2px;" />
                                                 <TextField fx:id="lastNameEntry" layoutX="268.0" layoutY="94.0" prefHeight="19.0" prefWidth="148.0" promptText="Last Name" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px; -fx-border-color: #8FBC8F;" />
                                                 <TextField fx:id="phoneEntry" layoutX="56.0" layoutY="139.0" prefHeight="19.0" prefWidth="151.0" promptText="Phone Number" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 0px 0px 2px;" />
-                                                <Button fx:id="addClientButton" layoutX="159.0" layoutY="263.0" mnemonicParsing="false" onAction="#addClient" prefHeight="22.0" prefWidth="132.0" text="Add Client" />
+                                                <Button fx:id="addClientButton" layoutX="159.0" layoutY="263.0" mnemonicParsing="false" onAction="#testFunction" prefHeight="22.0" prefWidth="132.0" text="Add Client" />
                                                 <ImageView fitHeight="13.0" fitWidth="14.0" layoutX="35.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
                                                     <image>
                                                         <Image url="@./images/call.png" />
