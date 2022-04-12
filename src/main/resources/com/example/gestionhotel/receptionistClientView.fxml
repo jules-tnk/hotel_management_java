@@ -7,9 +7,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionhotel.controller.ReceptionistController">
     <children>
-        <BorderPane layoutX="-1.0" layoutY="-1.0" prefHeight="400.0" prefWidth="600.0">
+        <BorderPane layoutX="-1.0" layoutY="-1.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
-                <HBox prefHeight="53.0" prefWidth="620.0" style="-fx-background-color: #20b2aa;" BorderPane.alignment="CENTER">
+                <HBox fx:id="title" prefHeight="53.0" prefWidth="620.0" style="-fx-background-color: #20b2aa;" BorderPane.alignment="CENTER">
                     <children>
                         <Label alignment="BOTTOM_LEFT" prefHeight="33.0" prefWidth="187.0" text="     Saharai Hotel" textFill="WHITE">
                             <font>
@@ -53,16 +53,16 @@
             <center>
                 <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                     <children>
-                        <TabPane prefHeight="354.0" prefWidth="450.0" tabClosingPolicy="UNAVAILABLE">
+                        <TabPane fx:id="MainPane" prefHeight="354.0" prefWidth="450.0" tabClosingPolicy="UNAVAILABLE">
                             <tabs>
                                 <Tab text="Add  ">
                                     <content>
-                                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                        <AnchorPane prefHeight="263.0" prefWidth="404.0">
                                             <children>
                                                 <TextField fx:id="firstNameEntry" layoutX="56.0" layoutY="94.0" prefHeight="19.0" prefWidth="151.0" promptText="First Name" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 0px 0px 2px;" />
                                                 <TextField fx:id="lastNameEntry" layoutX="268.0" layoutY="94.0" prefHeight="19.0" prefWidth="148.0" promptText="Last Name" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px; -fx-border-color: #8FBC8F;" />
                                                 <TextField fx:id="phoneEntry" layoutX="56.0" layoutY="139.0" prefHeight="19.0" prefWidth="151.0" promptText="Phone Number" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 0px 0px 2px;" />
-                                                <Button fx:id="addClientButton" layoutX="159.0" layoutY="263.0" mnemonicParsing="false" onAction="#testFunction" prefHeight="22.0" prefWidth="132.0" text="Add Client" />
+                                                <Button fx:id="addClientButton" layoutX="159.0" layoutY="263.0" mnemonicParsing="false" onAction="#addClient" prefHeight="22.0" prefWidth="132.0" text="Add Client" />
                                                 <ImageView fitHeight="13.0" fitWidth="14.0" layoutX="35.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
                                                     <image>
                                                         <Image url="@./images/call.png" />
@@ -91,6 +91,8 @@
                                                         <Image url="@./images/5828115 (1).png" />
                                                     </image>
                                                 </ImageView>
+                                    <Label fx:id="addClientLabelInfo" layoutX="83.0" layoutY="236.0" prefHeight="17.0" prefWidth="316.0" textAlignment="CENTER" />
+                                    <AnchorPane layoutX="8.0" layoutY="33.0" prefHeight="176.0" prefWidth="172.0" />
                                             </children>
                                         </AnchorPane>
                                     </content>
@@ -99,13 +101,14 @@
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                             <children>
-                                                <TextField fx:id="idClientToRemoveEntry" layoutX="133.0" layoutY="139.0" prefHeight="19.0" prefWidth="151.0" promptText="client id" style="-fx-background-color: transparent; -fx-border-color: red; -fx-border-width: 0px 0px 2px;" />
+                                                <TextField fx:id="idClientToRemoveEntry" layoutX="134.0" layoutY="132.0" prefHeight="19.0" prefWidth="151.0" promptText="client id" style="-fx-background-color: transparent; -fx-border-color: red; -fx-border-width: 0px 0px 2px;" />
                                                 <Button layoutX="111.0" layoutY="194.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="216.0" style="-fx-background-color: red;" text="Delete" />
                                                 <ImageView fitHeight="73.0" fitWidth="83.0" layoutX="173.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
                                                     <image>
                                                         <Image url="@./images/4302000.png" />
                                                     </image>
                                                 </ImageView>
+                                    <Label fx:id="removeClientLabelInfo" layoutX="119.0" layoutY="171.0" prefHeight="17.0" prefWidth="195.0" textAlignment="CENTER" />
                                             </children></AnchorPane>
                                     </content>
                                 </Tab>
@@ -119,7 +122,7 @@
                                                 <TextField fx:id="lastNameUpdateEntry" layoutX="275.0" layoutY="108.0" prefHeight="19.0" prefWidth="151.0" promptText="Last Name" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 0px 0px 2px;" />
                                                 <TextField fx:id="emailUpdateEntry" layoutX="275.0" layoutY="149.0" prefHeight="19.0" prefWidth="151.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 0px 0px 2px;" />
                                                 <TextField fx:id="birthDateUpdateEntry" layoutX="283.0" layoutY="197.0" prefHeight="19.0" prefWidth="151.0" promptText="Birth Date" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 0px 0px 2px;" />
-                                                <Button layoutX="162.0" layoutY="249.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="143.0" text="Modify client" />
+                                                <Button layoutX="163.0" layoutY="259.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="143.0" text="Modify client" />
                                                 <ImageView fitHeight="21.0" fitWidth="24.0" layoutX="31.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
                                                     <image>
                                                         <Image url="@./images/1077114.png" />
@@ -145,6 +148,7 @@
                                                         <Image url="@./images/5828115 (2).png" />
                                                     </image>
                                                 </ImageView>
+                                    <Label fx:id="modifyClientLabelInfo" layoutX="115.0" layoutY="233.0" prefHeight="17.0" prefWidth="238.0" textAlignment="CENTER" />
                                             </children></AnchorPane>
                                     </content>
                                 </Tab>

@@ -1,7 +1,9 @@
 package com.example.gestionhotel.controller;
 
 import com.example.gestionhotel.Main;
+import com.example.gestionhotel.model.Admin;
 import com.example.gestionhotel.model.DbConnector;
+import com.example.gestionhotel.model.Receptionist;
 import com.example.gestionhotel.model.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,19 +11,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class LoginController {
+    public Label loginLabelInfo;
+
     {
         new DbConnector();
     }
-    public TextField userNameEntry;
-    public PasswordField passwordEntry;
+    @FXML public TextField userNameEntry;
+    @FXML public PasswordField passwordEntry;
 
     private Stage stage;
     private Scene scene;
@@ -33,14 +37,12 @@ public class LoginController {
         String password = passwordEntry.getText();
         Worker workerLoggingIn = new Worker();
         boolean isWorkerLoggedIn = workerLoggingIn.login(username, password);
-        System.out.println("try login...");
         if ( isWorkerLoggedIn ){
-            System.out.println("logged in...");
             if (workerLoggingIn.getFunction().equals("admin")){
                 showAdminView(workerLoggingIn, event);
             }
             else if (workerLoggingIn.getFunction().equals("receptionist")){
-                showReceptionistClientView(workerLoggingIn, event);
+                //showReceptionistClientView(workerLoggingIn, event);
             }
         }
         else{
@@ -50,7 +52,7 @@ public class LoginController {
 
     @FXML
     public void showAdminView(Worker admin, ActionEvent event) {
-        AdminController.setAdmin(admin);
+        //AdminController.setAdmin(admin);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("adminView.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -65,7 +67,7 @@ public class LoginController {
     }
 
     @FXML
-    public void showReceptionistClientView(Worker receptionist, ActionEvent event) {
+    public void showReceptionistClientView(Receptionist receptionist, ActionEvent event) {
         ReceptionistController.setReceptionist(receptionist);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("receptionistClientView.fxml"));

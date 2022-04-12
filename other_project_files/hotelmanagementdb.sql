@@ -95,10 +95,10 @@ INSERT INTO `transaction` (`id_transaction`, `id_client`, `id_receptionnist`, `i
 -- --------------------------------------------------------
 
 --
--- Structure de la table `worker`
+-- Structure de la table `receptionist`
 --
 
-CREATE TABLE IF NOT EXISTS `worker` (
+CREATE TABLE IF NOT EXISTS `receptionist` (
   `firstName` varchar(45) NOT NULL,
   `lastName` varchar(45) NOT NULL,
   `id` varchar(45) NOT NULL,
@@ -111,10 +111,10 @@ CREATE TABLE IF NOT EXISTS `worker` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `worker`
+-- Contenu de la table `receptionist`
 --
 
-INSERT INTO `worker` (`firstName`, `lastName`, `id`, `phoneNumber`, `birthDate`, `email`, `function`, `password`) VALUES
+INSERT INTO `receptionist` (`firstName`, `lastName`, `id`, `phoneNumber`, `birthDate`, `email`, `function`, `password`) VALUES
 ('Kibalo Jules', 'Tinaka', 'eb416362', 608917921, '2000-01-01', 'julestnk.dev@gmail.com', 'receptionnist', 'Enchantress***912');
 
 --
@@ -127,7 +127,7 @@ INSERT INTO `worker` (`firstName`, `lastName`, `id`, `phoneNumber`, `birthDate`,
 ALTER TABLE `transaction`
   ADD CONSTRAINT `client_fk` FOREIGN KEY (`id_client`) REFERENCES `client` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `room_fk` FOREIGN KEY (`id_room`) REFERENCES `room` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `worker_fk` FOREIGN KEY (`id_receptionnist`) REFERENCES `worker` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `worker_fk` FOREIGN KEY (`id_receptionnist`) REFERENCES `receptionist` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

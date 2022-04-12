@@ -50,11 +50,21 @@ public class DbConnector {
 
     //MANAGE WORKERS
         //lOGIN
-    public static boolean isWorkeRegistered(String worker_id){
+    public static boolean isWorkerRegistered(String worker_id){
         String request = String.format("SELECT * FROM worker WHERE id=\"%s\"", worker_id);
         ResultSetMetaData metaData;
         resultSet = executeQueryRequest(request);
-        return (resultSet != null);
+        try {
+            if ( resultSet.next() ){
+                return true;
+            }
+            else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public static String getWorkerPassword(String worker_id){
@@ -70,20 +80,20 @@ public class DbConnector {
     }
 
     public static Worker getWorker(String worker_id) {
-        request = String.format("SELECT * FROM worker WHERE id=\"%s\"", worker_id);
+        request = String.format("SELECT * FROM receptionist WHERE id=\"%s\"", worker_id);
         resultSet = executeQueryRequest(request);
-        Worker worker = new Worker();
+        Receptionist receptionist = new Receptionist();
         try {
             while ( resultSet.next() ){
-                worker.setLastName( resultSet.getString("lastName") );
-                worker.setFirstName( resultSet.getString("firstName") );
-                worker.setFunction( resultSet.getString("function") );
-                worker.setId( resultSet.getString("id") );
-                worker.setEmail( resultSet.getString("email") );
-                worker.setPhoneNumber( resultSet.getInt("phoneNumber") );
-                worker.setBirthDate( resultSet.getDate("birthDate") );
+                receptionist.setLastName( resultSet.getString("lastName") );
+                receptionist.setFirstName( resultSet.getString("firstName") );
+                receptionist.setFunction( resultSet.getString("function") );
+                receptionist.setId( resultSet.getString("id") );
+                receptionist.setEmail( resultSet.getString("email") );
+                receptionist.setPhoneNumber( resultSet.getInt("phoneNumber") );
+                receptionist.setBirthDate( resultSet.getDate("birthDate") );
             }
-            return worker;
+            return receptionist;
         } catch (SQLException e){ e.printStackTrace(); return null;}
     }
 
@@ -94,14 +104,42 @@ public class DbConnector {
         executeUpdateRequest(request);
     }
 
+    public static boolean isClientRegistered(Client clientId){
+        request = String.format("SELECT * FROM client WHERE id=\"%s\"", clientId);
+        resultSet = executeQueryRequest(request);
+        try {
+            if (resultSet.next()){ return true; } else { return false; }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public static void getClient(){}
 
-    public static void removeClient(String idClient){}
+    public static boolean removeClient(String idClient){
+        return false;
+    }
 
     public static void updateClient(Client client){}
 
     //MANAGE ROOM
-    public static void addRoom(){}
+    public static boolean isRoomAvailable(String roomId){
+        request = String.format("SELECT available FROM room WHERE id=\"%s\"", roomId);
+        resultSet = executeQueryRequest(request);
+        boolean isAvailable;
+        try {
+            if ( resultSet.next() ){
+                isAvailable = resultSet.getBoolean("available");
+                return isAvailable;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     public static void getRoom(){}
 

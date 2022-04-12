@@ -1,21 +1,15 @@
 package com.example.gestionhotel.controller;
 
-import com.example.gestionhotel.model.Worker;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import org.kordamp.bootstrapfx.BootstrapFX;
-
-import java.io.IOException;
+import com.example.gestionhotel.model.Admin;
+import com.example.gestionhotel.model.Receptionist;
 
 public class AdminController {
-    static Worker admin;
+    static Admin admin;
 
     //GETTER
-    public Worker getAdmin() { return admin; }
+    public Admin getAdmin() { return admin; }
 
     //SETTER
-    public static void setAdmin(Worker newAdmin) { admin = newAdmin; }
+    public static void setAdmin(Admin newAdmin) { admin = newAdmin; }
 
 }
