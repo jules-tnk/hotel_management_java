@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -20,7 +21,7 @@ import java.io.IOException;
 
 public class LoginController {
     public Label loginLabelInfo;
-
+    public Button loginButton;
     {
         new DbConnector();
     }
@@ -35,28 +36,33 @@ public class LoginController {
     public void login(ActionEvent event){
         String username = userNameEntry.getText();
         String password = passwordEntry.getText();
-        Worker workerLoggingIn = new Worker();
-        boolean isWorkerLoggedIn = workerLoggingIn.login(username, password);
-        if ( isWorkerLoggedIn ){
-            if (workerLoggingIn.getFunction().equals("admin")){
-                showAdminView(workerLoggingIn, event);
+        boolean isWorkerRegistered = DbConnector.isWorkerRegistered(username);
+        if ( isWorkerRegistered ){
+            String savedPassword = DbConnector.getWorkerPassword(username);
+            if ( password.equals(savedPassword) ){
+                String workerFunction = DbConnector.getWorkerFunction(username);
+                if ( workerFunction.equals("admin") ){
+                    Admin adminLoggingIn = new Admin(username);
+                    AdminController.setAdmin(adminLoggingIn);
+                    switchToAdminView(event);
+                }
+                else if ( workerFunction.equals("receptionist") ){
+                    Receptionist receptionistLoggingIn = new Receptionist(username);
+                    ReceptionistController.setReceptionist(receptionistLoggingIn);
+                    switchToReceptionistClientView(event);
+                }
             }
-            else if (workerLoggingIn.getFunction().equals("receptionist")){
-                //showReceptionistClientView(workerLoggingIn, event);
-            }
+            else { loginLabelInfo.setText("Wrong password"); }
         }
-        else{
-            System.out.println("Wrong password...");
-        }
+        else { loginLabelInfo.setText("User not registered"); }
     }
 
     @FXML
-    public void showAdminView(Worker admin, ActionEvent event) {
-        //AdminController.setAdmin(admin);
+    public void switchToAdminView(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("adminView.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(fxmlLoader.load(), 320, 240);
+            scene = new Scene(fxmlLoader.load());
             stage.setMaximized(true);
             stage.setTitle("Administrator");
             stage.setScene(scene);
@@ -67,12 +73,11 @@ public class LoginController {
     }
 
     @FXML
-    public void showReceptionistClientView(Receptionist receptionist, ActionEvent event) {
-        ReceptionistController.setReceptionist(receptionist);
+    public void switchToReceptionistClientView(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("receptionistClientView.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(fxmlLoader.load(), 320, 240);
+            scene = new Scene(fxmlLoader.load());
             stage.setMaximized(true);
             stage.setTitle("Clients management");
             stage.setScene(scene);

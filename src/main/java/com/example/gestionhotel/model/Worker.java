@@ -6,6 +6,11 @@ public class Worker extends Person {
     //ATTRIBUTES
     protected String function;
 
+    public Worker(String id) {
+        Worker worker = DbConnector.getWorker(id);
+        //series od set
+    }
+
     public String getFunction() { return function; }
 
     public void setFunction(String function) { this.function = function; }

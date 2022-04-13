@@ -11,4 +11,7 @@ public class Admin extends Worker {
         setFunction(function);
         setPassword(password);
     }
+
+    public Admin(String username) {
+    }
 }

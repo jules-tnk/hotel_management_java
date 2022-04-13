@@ -157,4 +157,21 @@ public class DbConnector {
 
     public static void updateTransaction(){}
 
+    public static String getWorkerFunction(String workerId) {
+        request = String.format("SELECT function FROM worker WHERE id=\"%s\"", workerId);
+        resultSet = executeQueryRequest(request);
+        String function;
+        try {
+            if ( resultSet.next() ){
+                function = resultSet.getString("function");
+                return function;
+            }
+            else {
+                return null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

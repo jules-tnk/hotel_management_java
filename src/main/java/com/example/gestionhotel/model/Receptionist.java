@@ -7,6 +7,9 @@ public class Receptionist extends Worker {
     protected String function;
     protected String password;//the login is the id defined in the Person class
 
+    public Receptionist(String username) {
+    }
+
     //GETTERS
     public String getFunction() {
         return function;

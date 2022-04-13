@@ -98,10 +98,11 @@ public class ReceptionistController  implements Initializable {
     @FXML
     public void searchClient() {}
 
-    public void testFunction(ActionEvent event) {
-        System.out.println(ReceptionistController.receptionist.getLastName());
-    }
+    @FXML public void switchToRoomManagement(){}
 
+    @FXML public void switchToTransactionManagement(){}
+
+    @FXML public void switchToClientManagement(){}
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

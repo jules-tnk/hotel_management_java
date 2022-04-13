@@ -47,8 +47,8 @@
                   <Image url="@./images/1077114.png" />
                </image>
             </ImageView>
-            <Button layoutX="120.0" layoutY="332.0" mnemonicParsing="false" onAction="#login" prefHeight="31.0" prefWidth="82.0" style="-fx-background-color: #0589ff;" text="Login" textFill="WHITE" />
-            <Label fx:id="loginLabelInfo" layoutX="45.0" layoutY="298.0" prefHeight="17.0" prefWidth="235.0" text="Label" />
+            <Button fx:id="loginButton" layoutX="120.0" layoutY="332.0" mnemonicParsing="false" onAction="#login" prefHeight="31.0" prefWidth="82.0" style="-fx-background-color: #0589ff;" text="Login" textFill="WHITE" />
+            <Label fx:id="loginLabelInfo" layoutX="45.0" layoutY="298.0" prefHeight="17.0" prefWidth="235.0" text="" />
          </children>
       </AnchorPane>
    </center>
