@@ -1,18 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionhotel.controller.ReceptionistController">
-   <children>
-      <AnchorPane layoutX="150.0" layoutY="-15.0" prefHeight="200.0" prefWidth="200.0" />
-      <ComboBox layoutX="26.0" layoutY="73.0" prefWidth="150.0" promptText="eherther" />
-      <MenuButton layoutX="38.0" layoutY="160.0" mnemonicParsing="false" text="MenuButton">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-          <MenuItem mnemonicParsing="false" text="Action 2" />
-        </items>
-      </MenuButton>
-      <DatePicker layoutX="197.0" layoutY="210.0" />
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionhotel.controller.ReceptionistController">
+    <children>
+        <BorderPane layoutX="-1.0" layoutY="-1.0" prefHeight="400.0" prefWidth="600.0">
+            <top>
+                <HBox prefHeight="53.0" prefWidth="620.0" style="-fx-background-color: #20b2aa;" BorderPane.alignment="CENTER">
+                    <children>
+                        <Label alignment="BOTTOM_LEFT" prefHeight="33.0" prefWidth="187.0" text="     Saharai Hotel" textFill="WHITE">
+                            <font>
+                                <Font name="System Italic" size="24.0" />
+                            </font>
+                        </Label>
+                    </children></HBox>
+            </top>
+            <left>
+                <VBox prefHeight="347.0" prefWidth="132.0" style="-fx-background-color: #66CDAA;" BorderPane.alignment="CENTER">
+                    <children>
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#switchToClientManagement" prefHeight="25.0" prefWidth="159.0" style="-fx-background-color: #66CDAA;" text="Client" textFill="#140505">
+                            <graphic>
+                                <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@./images/1077114.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#switchToRoomManagementView" prefHeight="25.0" prefWidth="159.0" style="-fx-background-color: #66CDAA;" text="Room" textFill="#140505">
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@./images/2863205.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="159.0" style="-fx-background-color: #66CDAA;" text="Transactions" textFill="#140505">
+                            <graphic>
+                                <ImageView fitHeight="26.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@./images/879890.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children></VBox>
+            </left>
+            <center>
+                <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <TabPane prefHeight="354.0" prefWidth="450.0" tabClosingPolicy="UNAVAILABLE">
+                            <tabs>
+                                <Tab text="Modify">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                            <children>
+                                                <Label alignment="BOTTOM_CENTER" layoutX="109.0" layoutY="46.0" prefHeight="19.0" prefWidth="151.0" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 2px 2px 2px;" text="id_room" />
+                                                <Label layoutX="152.0" layoutY="94.0" prefHeight="19.0" prefWidth="151.0" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 0px 0px 2px;" />
+                                                <Button layoutX="156.0" layoutY="239.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="143.0" text="Save" />
+                                                <ImageView fitHeight="32.0" fitWidth="28.0" layoutX="62.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@./images/1972011.png" />
+                                                    </image>
+                                                </ImageView>
+                                                <Button layoutX="283.0" layoutY="44.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" text="Search" />
+                                                <ComboBox layoutX="153.0" layoutY="164.0" prefWidth="150.0" />
+                                                <Text layoutX="41.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Availability :" wrappingWidth="110.80340576171875">
+                                                    <font>
+                                                        <Font size="14.0" />
+                                                    </font>
+                                                </Text>
+                                            </children></AnchorPane>
+                                    </content>
+                                </Tab>
+                                <Tab text="Search">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                            <children>
+                                                <AnchorPane layoutY="13.0" prefHeight="306.0" prefWidth="148.0">
+                                                    <children>
+                                                        <Button layoutX="12.0" layoutY="264.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="123.0" style="-fx-background-color: #20b2aa;" text="Search" textFill="WHITE" />
+                                                        <Text layoutX="4.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MinPrice :" underline="true" />
+                                                        <ComboBox layoutX="32.0" layoutY="25.0" prefHeight="20.0" prefWidth="103.0" />
+                                                        <Text layoutX="8.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MaxPrice :" underline="true" />
+                                                        <ComboBox layoutX="31.0" layoutY="89.0" prefHeight="25.0" prefWidth="106.0" />
+                                                        <Text layoutX="4.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type :" underline="true" />
+                                                        <ComboBox layoutX="32.0" layoutY="147.0" prefHeight="25.0" prefWidth="105.0" />
+                                                        <ComboBox layoutX="33.0" layoutY="207.0" prefHeight="25.0" prefWidth="103.0" />
+                                                        <Text layoutX="3.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Availability :" underline="true" />
+                                                    </children>
+                                                </AnchorPane>
+                                                <TableView layoutX="148.0" layoutY="12.0" prefHeight="307.0" prefWidth="322.0">
+                                                    <columns>
+                                                        <TableColumn prefWidth="80.66668701171875" text="id_room" />
+                                                        <TableColumn prefWidth="76.0" text="Type" />
+                                                        <TableColumn prefWidth="74.00006103515625" text="Price" />
+                                                        <TableColumn prefWidth="98.66665649414062" text="Availability" />
+                                                    </columns>
+                                                </TableView>
+                                                <HBox layoutX="-2.0" layoutY="-2.0" prefHeight="15.0" prefWidth="472.0" style="-fx-background-color: #66CDAA;" />
+                                            </children></AnchorPane>
+                                    </content>
+                                </Tab>
+                            </tabs>
+                        </TabPane>
+                    </children>
+                </VBox>
+            </center>
+        </BorderPane>
+    </children>
 </AnchorPane>

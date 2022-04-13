@@ -8,9 +8,12 @@ public class Worker extends Person {
 
     public Worker(String id) {
         Worker worker = DbConnector.getWorker(id);
-        //series od set
+        //series of setters
     }
 
+    //GETTERS
+
+    //SETTERS
     public String getFunction() { return function; }
 
     public void setFunction(String function) { this.function = function; }
@@ -28,23 +31,4 @@ public class Worker extends Person {
 
     }
 
-    //LOGIN
-    public boolean login(String id, String password){
-        boolean isRegistered = DbConnector.isWorkerRegistered(id);
-        if ( isRegistered ){
-            String savedPassword = DbConnector.getWorkerPassword(id);
-            if (password.equals(savedPassword)){
-                Worker worker = DbConnector.getWorker(id);
-               /* setFirstName(receptionist.getFirstName());
-                setLastName(receptionist.getLastName());
-                setEmail(receptionist.getEmail());
-                setId(receptionist.getId());
-                setFunction(receptionist.getFunction());
-                setBirthDate(receptionist.getBirthDate());
-                setPhoneNumber(receptionist.getPhoneNumber());*/
-                return true;
-            } else { return false; }
-        }
-        else { return false; }
-    }
 }

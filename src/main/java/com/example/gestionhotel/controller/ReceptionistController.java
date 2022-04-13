@@ -1,29 +1,42 @@
 package com.example.gestionhotel.controller;
 
+import com.example.gestionhotel.Main;
 import com.example.gestionhotel.model.Client;
 import com.example.gestionhotel.model.DbConnector;
 import com.example.gestionhotel.model.Receptionist;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class ReceptionistController  implements Initializable {
-
+    public static Receptionist receptionist;
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
     {
         new DbConnector();
     }
-    public TextField firstNameSearchEntry;
-    public TextField lastNameSearchEntry;
-    public TextField emailSearchEntry;
-    public TextField idClientSearchEntry;
-    static Receptionist receptionist;
+
+    //SEARCH
+    @FXML private TextField firstNameSearchEntry;
+    @FXML private TextField lastNameSearchEntry;
+    @FXML private TextField emailSearchEntry;
+    @FXML private TextField idClientSearchEntry;
 
     //ADD
     @FXML private TextField firstNameEntry;
@@ -32,6 +45,7 @@ public class ReceptionistController  implements Initializable {
     @FXML private TextField phoneEntry;
     @FXML private TextField emailEntry;
     @FXML private TextField birthDateEntry;
+    @FXML private DatePicker birthDatePicker;
     @FXML private TextField idClientEntry;
     @FXML public Label addClientLabelInfo;
 
@@ -62,8 +76,8 @@ public class ReceptionistController  implements Initializable {
         String  lastName = lastNameEntry.getText();
         int phoneNumber = Integer.parseInt(phoneEntry.getText());
         String email = emailEntry.getText();
-        String StringBirthDate = birthDateEntry.getText();
-        Date birthDate = Date.valueOf(StringBirthDate);
+        LocalDate localBirthDate = birthDatePicker.getValue(); //Get the date in the java local format
+        Date birthDate = Date.valueOf(localBirthDate); //convert the date to the sql format
         String idClient = idClientEntry.getText();
         Client newClient = new Client(firstName, lastName, idClient, email, phoneNumber, birthDate);
         //receptionist.checkIfClientExist();
@@ -98,11 +112,36 @@ public class ReceptionistController  implements Initializable {
     @FXML
     public void searchClient() {}
 
-    @FXML public void switchToRoomManagement(){}
+    @FXML public void switchToRoomManagementView(ActionEvent event){
+        System.out.println("Changing view...");
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("receptionistRoomView.fxml"));
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(fxmlLoader.load());
+            stage.setMaximized(true);
+            stage.setTitle("Clients management");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-    @FXML public void switchToTransactionManagement(){}
+    @FXML public void switchToTransactionManagementView(){}
 
-    @FXML public void switchToClientManagement(){}
+    @FXML public void switchToClientManagement(ActionEvent event){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("receptionistClientView.fxml"));
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(fxmlLoader.load());
+            stage.setMaximized(true);
+            stage.setTitle("Clients management");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

@@ -5,7 +5,6 @@ public class Test {
         new DbConnector();
         System.out.println( DbConnector.getWorkerPassword("eb416362") );
         Receptionist wrk = new Receptionist();
-        wrk.login("eb416362", "Enchantress***912");
         System.out.println(wrk.getFunction());
     }
 }
