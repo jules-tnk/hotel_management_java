@@ -12,6 +12,14 @@ public class Admin extends Worker {
         setPassword(password);
     }
 
-    public Admin(String username) {
+    public Admin(String adminId) {
+        Admin admin = DbConnector.getAdmin(adminId);
+        this.setFirstName( admin.getFirstName() );
+        this.setLastName( admin.getLastName() );
+        this.setBirthDate( admin.getBirthDate() );
+        this.setFunction( admin.getFunction() );
+        this.setId( admin.getId() );
+        this.setEmail( admin.getEmail() );
+        this.setBirthDate( admin.getBirthDate() );
     }
 }

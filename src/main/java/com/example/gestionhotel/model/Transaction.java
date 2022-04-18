@@ -1,29 +1,32 @@
 package com.example.gestionhotel.model;
 
 import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class Transaction {
     //ATTRIBUTES
-    private String id_transaction;
-    private String id_client;
-    private String id_receptionist;
-    private String id_room;
+    private int idTransaction;
+    private String idClient;
+    private String idReceptionist;
+    private String idRoom;
     private String nature;
     private Date date;
     private double price;
+
+    public Transaction() {
+
+    }
+
     //private int numberOfDays;
 
     //GETTERS
-    public String getId_client() {
-        return id_client;
+    public String getIdClient() {
+        return idClient;
     }
-    public String getId_receptionist() {
-        return id_receptionist;
+    public String getIdReceptionist() {
+        return idReceptionist;
     }
-    public String getId_room() {
-        return id_room;
+    public String getIdRoom() {
+        return idRoom;
     }
     public String getNature() {
         return nature;
@@ -34,27 +37,58 @@ public class Transaction {
     public double getPrice() {
         return price;
     }
-    public String getId_transaction() { return id_transaction; }
+    public int getIdTransaction() { return idTransaction; }
 
     //SETTERS
-    public void setId_client(String id_cient) {this.id_client = id_cient; }
-    public void setId_receptionnist(String id_receptionnist) { this.id_receptionist = id_receptionnist; }
-    public void setId_room(String id_room) { this.id_room = id_room; }
+    public void setIdClient(String idClient) {this.idClient = idClient; }
+    public void setIdReceptionist(String idReceptionist) { this.idReceptionist = idReceptionist; }
+    public void setIdRoom(String idRoom) { this.idRoom = idRoom; }
     public void setNature(String nature) { this.nature = nature; }
     public void setDate(Date date) { this.date = date; }
     public void setPrice(double price) { this.price = price; }
-    public void setId_transaction(String id_transaction) { this.id_transaction = id_transaction; }
+    public void setIdTransaction(int idTransaction) { this.idTransaction = idTransaction; }
 
     //CONSTRUCTORS
-    public Transaction(String id_transaction, String id_client, String id_receptionist, String id_room, String nature, Date date, double price) {
-        setId_client(id_client);
-        setId_receptionnist(id_receptionist);
-        setId_room(id_room);
+    public Transaction(int idTransaction, String idClient, String idReceptionist, String idRoom, String nature, Date date, double price) {
+        setIdClient(idClient);
+        setIdReceptionist(idReceptionist);
+        setIdRoom(idRoom);
         setNature(nature);
         setDate(date);
-        setPrice(price);setId_transaction(id_transaction);
+        setPrice(price);
+        setIdTransaction(idTransaction);
     }
 
-    public static void main(String[] args) {
+    public Transaction(String idClient, String idReceptionist, String idRoom, String nature, Date date, double price) {
+        setIdClient(idClient);
+        setIdReceptionist(idReceptionist);
+        setIdRoom(idRoom);
+        setNature(nature);
+        setDate(date);
+        setPrice(price);
     }
+
+    public Transaction(String idClient, String idReceptionist, String idRoom, String nature, Date date) {
+        setIdClient(idClient);
+        setIdReceptionist(idReceptionist);
+        setIdRoom(idRoom);
+        setNature(nature);
+        setDate(date);
+    }
+
+    public Transaction(String idClient, String idReceptionist, String idRoom, String nature) {
+        setIdClient(idClient);
+        setIdReceptionist(idReceptionist);
+        setIdRoom(idRoom);
+        setNature(nature);
+    }
+
+    public Transaction(String clientId, String receptionistId, String roomId, String nature, double price) {
+        setIdClient(clientId);
+        setIdReceptionist(receptionistId);
+        setIdRoom(roomId);
+        setNature(nature);
+        setPrice(price);
+    }
+
 }

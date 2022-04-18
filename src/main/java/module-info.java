@@ -18,4 +18,6 @@ module com.example.gestionhotel {
     opens com.example.gestionhotel.controller to javafx.fxml;
     exports com.example.gestionhotel.model;
     opens com.example.gestionhotel.model to javafx.fxml;
+    exports com.example.gestionhotel.model.test;
+    opens com.example.gestionhotel.model.test to javafx.fxml;
 }

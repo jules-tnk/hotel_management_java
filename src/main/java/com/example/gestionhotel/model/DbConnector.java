@@ -1,5 +1,8 @@
 package com.example.gestionhotel.model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.*;
 
 public class DbConnector {
@@ -13,9 +16,9 @@ public class DbConnector {
     private Connection connection = null;
     private static Statement statement = null;
     private static String request;
-    private static ResultSet resultSet ;
+    private static ResultSet resultSet;
 
-    public static ResultSet executeQueryRequest(String request){
+    public static ResultSet executeQueryRequest(String request) {
         ResultSet result;
         try {
             result = statement.executeQuery(request);
@@ -26,7 +29,7 @@ public class DbConnector {
         return result;
     }
 
-    public static int executeUpdateRequest(String request){
+    public static int executeUpdateRequest(String request) {
         int result;
         try {
             result = statement.executeUpdate(request);
@@ -37,22 +40,258 @@ public class DbConnector {
         return result;
     }
 
-    public DbConnector(){
-        try{ Class.forName(JDBC_DRIVER);}
-        catch (ClassNotFoundException e){ e.printStackTrace(); }
+    public DbConnector() {
+        if ( connection == null ){
+            try {
+                Class.forName(JDBC_DRIVER);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
 
-        try {
-            connection = DriverManager.getConnection(DATABASE_URL, databaseUser, databasePassword);
-            statement = connection.createStatement();
-        } catch (SQLException e) { e.printStackTrace(); }
-
+            try {
+                connection = DriverManager.getConnection(DATABASE_URL, databaseUser, databasePassword);
+                statement = connection.createStatement();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     //MANAGE WORKERS
-        //lOGIN
-    public static boolean isWorkerRegistered(String worker_id){
-        String request = String.format("SELECT * FROM worker WHERE id=\"%s\"", worker_id);
+    public static Admin getAdmin(String adminId) {
+        request = String.format("SELECT * FROM worker WHERE id=\"%s\"", adminId);
+        resultSet = executeQueryRequest(request);
+        Admin admin = new Admin();
+        try {
+            while (resultSet.next()) {
+                admin.setLastName(resultSet.getString("lastName"));
+                admin.setFirstName(resultSet.getString("firstName"));
+                admin.setFunction(resultSet.getString("function"));
+                admin.setId(resultSet.getString("id"));
+                admin.setEmail(resultSet.getString("email"));
+                admin.setPhoneNumber(resultSet.getInt("phoneNumber"));
+                admin.setBirthDate(resultSet.getDate("birthDate"));
+            }
+            return admin;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Receptionist getReceptionist(String receptionistId) {
+        request = String.format("SELECT * FROM worker WHERE id=\"%s\"", receptionistId);
+        resultSet = executeQueryRequest(request);
+        Receptionist receptionist = new Receptionist();
+        try {
+            while (resultSet.next()) {
+                receptionist.setLastName(resultSet.getString("lastName"));
+                receptionist.setFirstName(resultSet.getString("firstName"));
+                receptionist.setFunction(resultSet.getString("function"));
+                receptionist.setId(resultSet.getString("id"));
+                receptionist.setEmail(resultSet.getString("email"));
+                receptionist.setPhoneNumber(resultSet.getInt("phoneNumber"));
+                receptionist.setBirthDate(resultSet.getDate("birthDate"));
+            }
+            return receptionist;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static boolean isWorkerRegistered(String workerId) {
+        String request = String.format("SELECT * FROM worker WHERE id=\"%s\"", workerId);
         ResultSetMetaData metaData;
+        resultSet = executeQueryRequest(request);
+        try {
+            if (resultSet.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static String getWorkerPassword(String workerId) {
+        String request = String.format("SELECT password FROM worker WHERE id=\"%s\"", workerId);
+        String password = "";
+        resultSet = executeQueryRequest(request);
+        try {
+            while (resultSet.next()) {
+                password = resultSet.getString("password");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return password;
+    }
+
+    public static Worker getWorker(String workerId) {
+        request = String.format("SELECT * FROM receptionist WHERE id=\"%s\"", workerId);
+        resultSet = executeQueryRequest(request);
+        Receptionist receptionist = new Receptionist();
+        try {
+            while (resultSet.next()) {
+                receptionist.setLastName(resultSet.getString("lastName"));
+                receptionist.setFirstName(resultSet.getString("firstName"));
+                receptionist.setFunction(resultSet.getString("function"));
+                receptionist.setId(resultSet.getString("id"));
+                receptionist.setEmail(resultSet.getString("email"));
+                receptionist.setPhoneNumber(resultSet.getInt("phoneNumber"));
+                receptionist.setBirthDate(resultSet.getDate("birthDate"));
+            }
+            return receptionist;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String getWorkerFunction(String workerId) {
+        request = String.format("SELECT function FROM worker WHERE id=\"%s\"", workerId);
+        resultSet = executeQueryRequest(request);
+        String function;
+        try {
+            if (resultSet.next()) {
+                function = resultSet.getString("function");
+                return function;
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    //MANAGE CLIENTS
+    public static boolean addClient(Client client) {
+        request = String.format("INSERT INTO client (id, firstName, lastName, phoneNumber, email, birthDate) VALUES(\"%s\",\"%s\",\"%s\",%s,\"%s\",\"%s\")",
+                client.getId(), client.getFirstName(), client.getLastName(), client.getPhoneNumber(), client.getEmail(), client.getBirthDate());
+        int result = executeUpdateRequest(request);
+
+        return result == 1;
+    }
+
+    public static boolean isClientRegistered(String clientId) {
+        request = String.format("SELECT * FROM client WHERE id=\"%s\"", clientId);
+        resultSet = executeQueryRequest(request);
+        try {
+            if (resultSet.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean removeClient(String idClient) {
+        request = String.format("DELETE FROM client where id=\"%s\"", idClient);
+        int result = executeUpdateRequest(request);
+        return result == 1;
+    }
+
+    public static void updateClient(Client client) {
+    }
+
+    public static ObservableList<Client> getClientsById(String clientId) {
+        request = String.format("SELECT * FROM client WHERE id=\"%s\"", clientId);
+        resultSet = executeQueryRequest(request);
+        try {
+            ObservableList<Client> clientList = FXCollections.observableArrayList();
+            while ( resultSet.next() ){
+                Client newClient = new Client();
+                newClient.setFirstName( resultSet.getString("firstName") );
+                newClient.setLastName( resultSet.getString("lastName") );
+                newClient.setId( resultSet.getString("id") );
+                newClient.setEmail( resultSet.getString("email") );
+                newClient.setPhoneNumber( resultSet.getInt("phoneNumber") );
+                newClient.setBirthDate( resultSet.getDate("birthDate") );
+                clientList.add(newClient);
+            }
+            return clientList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ObservableList<Client> getClientsByFirstName(String firstName) {
+        request = String.format("SELECT * FROM client WHERE firstName like '%s'", firstName);
+        resultSet = executeQueryRequest(request);
+        try {
+            ObservableList<Client> clientList = FXCollections.observableArrayList();
+            while ( resultSet.next() ){
+                Client newClient = new Client();
+                newClient.setFirstName( resultSet.getString("firstName") );
+                newClient.setLastName( resultSet.getString("lastName") );
+                newClient.setId( resultSet.getString("id") );
+                newClient.setEmail( resultSet.getString("email") );
+                newClient.setPhoneNumber( resultSet.getInt("phoneNumber") );
+                newClient.setBirthDate( resultSet.getDate("birthDate") );
+                clientList.add(newClient);
+            }
+            return clientList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ObservableList<Client> getClientsByLastName(String lastName) {
+        request = String.format("SELECT * FROM client WHERE lastName like '%s'", lastName);
+        resultSet = executeQueryRequest(request);
+        try {
+            ObservableList<Client> clientList = FXCollections.observableArrayList();
+            while ( resultSet.next() ){
+                Client newClient = new Client();
+                newClient.setFirstName( resultSet.getString("firstName") );
+                newClient.setLastName( resultSet.getString("lastName") );
+                newClient.setId( resultSet.getString("id") );
+                newClient.setEmail( resultSet.getString("email") );
+                newClient.setPhoneNumber( resultSet.getInt("phoneNumber") );
+                newClient.setBirthDate( resultSet.getDate("birthDate") );
+                clientList.add(newClient);
+            }
+            return clientList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ObservableList<Client> getClientsByEmail(String email) {
+        request = String.format("SELECT * FROM client WHERE email like '%s'", email);
+        resultSet = executeQueryRequest(request);
+        try {
+            ObservableList<Client> clientList = FXCollections.observableArrayList();
+            while ( resultSet.next() ){
+                Client newClient = new Client();
+                newClient.setFirstName( resultSet.getString("firstName") );
+                newClient.setLastName( resultSet.getString("lastName") );
+                newClient.setId( resultSet.getString("id") );
+                newClient.setEmail( resultSet.getString("email") );
+                newClient.setPhoneNumber( resultSet.getInt("phoneNumber") );
+                newClient.setBirthDate( resultSet.getDate("birthDate") );
+                clientList.add(newClient);
+            }
+            return clientList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    //MANAGE ROOMS
+    public static boolean isRoomRegistered(String roomID) {
+        request = String.format("SELECT * FROM room WHERE id=\"%s\"", roomID);
         resultSet = executeQueryRequest(request);
         try {
             if ( resultSet.next() ){
@@ -67,69 +306,12 @@ public class DbConnector {
         }
     }
 
-    public static String getWorkerPassword(String worker_id){
-        String request = String.format("SELECT password FROM worker WHERE id=\"%s\"", worker_id);
-        String password = "";
-        resultSet = executeQueryRequest(request);
-        try {
-            while ( resultSet.next() ){
-                password = resultSet.getString("password");
-            }
-        } catch (SQLException e) { e.printStackTrace(); }
-        return password;
-    }
-
-    public static Worker getWorker(String worker_id) {
-        request = String.format("SELECT * FROM receptionist WHERE id=\"%s\"", worker_id);
-        resultSet = executeQueryRequest(request);
-        Receptionist receptionist = new Receptionist();
-        try {
-            while ( resultSet.next() ){
-                receptionist.setLastName( resultSet.getString("lastName") );
-                receptionist.setFirstName( resultSet.getString("firstName") );
-                receptionist.setFunction( resultSet.getString("function") );
-                receptionist.setId( resultSet.getString("id") );
-                receptionist.setEmail( resultSet.getString("email") );
-                receptionist.setPhoneNumber( resultSet.getInt("phoneNumber") );
-                receptionist.setBirthDate( resultSet.getDate("birthDate") );
-            }
-            return receptionist;
-        } catch (SQLException e){ e.printStackTrace(); return null;}
-    }
-
-    //MANAGE CLIENTS
-    public static void addClient(Client client){
-        request = String.format("INSERT INTO client (id, firstName, lastName, phoneNumber, email, birthDate) VALUES(\"%s\",\"%s\",\"%s\",%s,\"%s\",\"%s\")",
-                client.getId(), client.getFirstName(), client.getLastName(), client.getPhoneNumber(), client.getEmail(), client.getBirthDate());
-        executeUpdateRequest(request);
-    }
-
-    public static boolean isClientRegistered(Client clientId){
-        request = String.format("SELECT * FROM client WHERE id=\"%s\"", clientId);
-        resultSet = executeQueryRequest(request);
-        try {
-            if (resultSet.next()){ return true; } else { return false; }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public static void getClient(){}
-
-    public static boolean removeClient(String idClient){
-        return false;
-    }
-
-    public static void updateClient(Client client){}
-
-    //MANAGE ROOM
-    public static boolean isRoomAvailable(String roomId){
+    public static boolean isRoomAvailable(String roomId) {
         request = String.format("SELECT available FROM room WHERE id=\"%s\"", roomId);
         resultSet = executeQueryRequest(request);
         boolean isAvailable;
         try {
-            if ( resultSet.next() ){
+            if (resultSet.next()) {
                 isAvailable = resultSet.getBoolean("available");
                 return isAvailable;
             } else {
@@ -141,37 +323,118 @@ public class DbConnector {
         }
     }
 
-    public static void getRoom(){}
+    public static boolean setRoomAvailability(String roomId, boolean availability) {
+        int isAvailable = (availability) ? 1 : 0;
+        request = String.format("UPDATE room SET available=\"%s\" WHERE room.id = \"%s\"", isAvailable, roomId);
+        int result = executeUpdateRequest(request);
+        return result == 1;
+    }
 
-    public static void removeRoom(){}
-
-    public static void setRoomAvailability (){}
-
-
-    //MANAGE TRANSACTIONS
-    public static void addTransaction(){}
-
-    public static void getTransaction(){}
-
-    public static void removeTransaction(){}
-
-    public static void updateTransaction(){}
-
-    public static String getWorkerFunction(String workerId) {
-        request = String.format("SELECT function FROM worker WHERE id=\"%s\"", workerId);
+    public static ObservableList<Room> getRoomsByTags(double minPrice, double maxPrice, String type, Boolean isAvailable) {
+        int isAvailableInt = ( isAvailable )? 1 : 0;
+        request = String.format("SELECT * FROM room WHERE price>=%s AND price<=%s AND type=\"%s\" AND available=%s",
+                minPrice, maxPrice, type, isAvailableInt);
         resultSet = executeQueryRequest(request);
-        String function;
+        String id; double price;
         try {
-            if ( resultSet.next() ){
-                function = resultSet.getString("function");
-                return function;
+            ObservableList<Room> roomList = FXCollections.observableArrayList();
+            while ( resultSet.next() ){
+                id = resultSet.getString("id");
+                price = resultSet.getDouble("price");
+                Room newRoom = new Room(id, price, type, isAvailable);
+                roomList.add(newRoom);
             }
-            else {
-                return null;
-            }
+            return roomList;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static double getRoomPrice(String roomId) {
+        request = String.format("SELECT price FROM room WHERE id=\"%s\"", roomId);
+        resultSet = executeQueryRequest(request);
+        try {
+            if (resultSet.next()){
+                return resultSet.getDouble("price");
+            } else {
+                return 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    //MANAGE TRANSACTIONS
+    public static boolean addReservation(Transaction reservation) {
+        //add reservation
+        request = String.format("INSERT INTO transaction (idClient, idReceptionist, idRoom, nature) VALUES(\"%s\",\"%s\",\"%s\",\"%s\")",
+                reservation.getIdClient(), reservation.getIdReceptionist(), reservation.getIdRoom(), reservation.getNature());
+        int result = executeUpdateRequest(request);
+
+        if (result == 1){
+            //update room availability
+            request = String.format("UPDATE room SET available=0 WHERE room.id = \"%s\"", reservation.getIdRoom());
+            result = executeUpdateRequest(request);
+        }
+
+        return result == 1;
+    }
+
+    public static boolean addLiberation(Transaction liberation) {
+        //add liberation
+        request = String.format("INSERT INTO transaction (idClient, idReceptionist, idRoom, nature, price) VALUES(\"%s\",\"%s\",\"%s\",\"%s\",%s)",
+                liberation.getIdClient(), liberation.getIdReceptionist(), liberation.getIdRoom(), liberation.getNature(), liberation.getPrice() );
+        int result = executeUpdateRequest(request);
+
+        if (result == 1){
+            //update room availability
+            request = String.format("UPDATE room SET available=1 WHERE room.id = \"%s\"", liberation.getIdRoom());
+            result = executeUpdateRequest(request);
+        }
+
+        return result == 1;
+    }
+
+    public static Transaction getClientLastTransaction(String clientId) {
+        request = String.format("SELECT * FROM transaction WHERE " +
+                " idTransaction=(SELECT MAX(idTransaction) from transaction WHERE idClient=\"%s\")", clientId, clientId);
+        resultSet = executeQueryRequest(request);
+        Transaction transaction = new Transaction();
+        try {
+            if (resultSet.next()){
+                transaction.setIdRoom(resultSet.getString("idRoom"));
+                transaction.setIdTransaction(resultSet.getInt("idTransaction"));
+                //other fields
+            }
+            return transaction;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    public static int getReservationDuration(int idTransaction) {
+        request = String.format("SELECT DATEDIFF(CURDATE(), date) AS duration FROM transaction WHERE idTransaction=%s", idTransaction);
+        resultSet = executeQueryRequest(request);
+        try {
+            if (resultSet.next()){
+                return resultSet.getInt("duration");
+            }
+            return -2;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -3;
+        }
+    }
+
+
+    public static ObservableList<Transaction> getTransactionsByDate(Date dateInf, Date dateSup) {
+        String dateStart = String.valueOf(dateInf);
+        String dateEnd = String.valueOf(dateSup);
+        request = String.format("SELECT * FROM transaction WHERE");
+        return null;//!!!!!!!!!!!!!!!!!!!!!!!
     }
 }

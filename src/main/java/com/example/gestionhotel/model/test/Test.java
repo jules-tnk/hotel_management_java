@@ -1,4 +1,7 @@
-package com.example.gestionhotel.model;
+package com.example.gestionhotel.model.test;
+
+import com.example.gestionhotel.model.DbConnector;
+import com.example.gestionhotel.model.Receptionist;
 
 public class Test {
     public static void main(String[] args) {

@@ -4,7 +4,6 @@ import com.example.gestionhotel.Main;
 import com.example.gestionhotel.model.Admin;
 import com.example.gestionhotel.model.DbConnector;
 import com.example.gestionhotel.model.Receptionist;
-import com.example.gestionhotel.model.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,21 +33,24 @@ public class LoginController {
 
     @FXML
     public void login(ActionEvent event){
-        String username = userNameEntry.getText();
+        String workerId = userNameEntry.getText();
         String password = passwordEntry.getText();
-        boolean isWorkerRegistered = DbConnector.isWorkerRegistered(username);
+        boolean isWorkerRegistered = DbConnector.isWorkerRegistered(workerId);
         if ( isWorkerRegistered ){
-            String savedPassword = DbConnector.getWorkerPassword(username);
+            String savedPassword = DbConnector.getWorkerPassword(workerId);
             if ( password.equals(savedPassword) ){
-                String workerFunction = DbConnector.getWorkerFunction(username);
+                String workerFunction = DbConnector.getWorkerFunction(workerId);
                 if ( workerFunction.equals("admin") ){
-                    Admin adminLoggingIn = new Admin(username);
+                    Admin adminLoggingIn = new Admin(workerId);
                     AdminController.setAdmin(adminLoggingIn);
+                    //set admin to others views
                     switchToAdminView(event);
                 }
                 else if ( workerFunction.equals("receptionist") ){
-                    Receptionist receptionistLoggingIn = new Receptionist(username);
-                    ReceptionistController.setReceptionist(receptionistLoggingIn);
+                    Receptionist receptionistLoggingIn = new Receptionist(workerId);
+                    ReceptionistClientController.setReceptionist(receptionistLoggingIn);
+                    ReceptionistRoomController.setReceptionist(receptionistLoggingIn);
+                    ReceptionistTransactionController.setReceptionist(receptionistLoggingIn);
                     switchToReceptionistClientView(event);
                 }
             }
