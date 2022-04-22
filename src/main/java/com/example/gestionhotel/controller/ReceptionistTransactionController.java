@@ -20,9 +20,6 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 public class ReceptionistTransactionController {
-    {
-        new DbConnector();
-    }
     public static Receptionist receptionist = new Receptionist();
 
     //FXML SEARCH TAB
@@ -34,9 +31,11 @@ public class ReceptionistTransactionController {
     @FXML private ComboBox boxSearchMaxPrice;
     @FXML private TableColumn<Transaction, String> columnSearchClientId;
     @FXML private TableColumn<Transaction, String> columnSearchRoomId;
+    @FXML private TableColumn<Transaction, String> columnSearchIdReceptionist;
     @FXML private TableColumn<Transaction, String> columnSearchDate;
     @FXML private TableColumn<Transaction, Double> columnSearchPrice;
     @FXML private TableColumn<Transaction, String> columnSearchNature;
+    @FXML private TableColumn<Transaction, String> columnSearchIdTransaction;
     @FXML private TableView<Transaction> tableSearchTransaction;
 
     //FXML RESERVE TAB
@@ -74,11 +73,25 @@ public class ReceptionistTransactionController {
 
     //SEARCH TRANSACTIONS WITH TAGS
     public void searchTransactionByClientId(ActionEvent event) {
+        //retrieve info from the view fields
         String clientId = entrySearchClientId.getText();
+
+        //get the transaction's list from the database
+        ObservableList<Transaction> transactionList = DbConnector.getTransactionsByClientId(clientId);
+
+        //display the list in the table
+        displayTransactionsInTable(transactionList);
     }
 
     public void searchTransactionByRoomId(ActionEvent event) {
+        //retrieve info from the view fields
         String roomId = entrySearchRoomId.getText();
+
+        //get the transaction's list from the database
+        ObservableList<Transaction> transactionList = DbConnector.getTransactionsByRoomId(roomId);
+
+        //display the list in the table
+        displayTransactionsInTable(transactionList);
     }
 
     public void searchTransactionByDate(ActionEvent event) {
@@ -93,15 +106,49 @@ public class ReceptionistTransactionController {
         //get the transaction's list
         ObservableList<Transaction> transactionList = DbConnector.getTransactionsByDate(dateInf, dateSup);
 
-        tableSearchTransaction.setItems(transactionList);
-        System.out.println(dateInf);
-        System.out.println(dateSup);
+        //display the list in the table
+        displayTransactionsInTable(transactionList);
     }
 
     public void searchTransactionByPrice(ActionEvent event) {
+        //retrieve info from the view fields
+        double minPrice = Double.parseDouble( (String) boxSearchMinPrice.getValue() );
+        double maxPrice = Double.parseDouble( (String) boxSearchMaxPrice.getValue() );
+
+        //get the transaction's list from the database
+        ObservableList<Transaction> transactionList = DbConnector.getTransactionsByPrice(minPrice, maxPrice);
+
+        //display the list in the table
+        displayTransactionsInTable(transactionList);
     }
 
     public void searchTransactionByTags(ActionEvent event) {
+        String clientId = entrySearchClientId.getText();
+        String roomId = entrySearchRoomId.getText();
+        double minPrice = Double.parseDouble( (String) boxSearchMinPrice.getValue() );
+        double maxPrice = Double.parseDouble( (String) boxSearchMaxPrice.getValue() );
+
+        //Get the date in the java local format
+        LocalDate localDateInf = datePickerSearchStart.getValue();
+        LocalDate localDateSup = datePickerSearchEnd.getValue();
+
+        //convert the date to the sql format
+        Date dateInf = Date.valueOf(localDateInf);
+        Date dateSup = Date.valueOf(localDateSup);
+    }
+
+    public void displayTransactionsInTable(ObservableList<Transaction> transactionList){
+        //set the values of the table's column
+        columnSearchIdTransaction.setCellValueFactory(new PropertyValueFactory<>("idTransaction"));
+        columnSearchClientId.setCellValueFactory(new PropertyValueFactory<>("idClient"));
+        columnSearchIdReceptionist.setCellValueFactory(new PropertyValueFactory<>("idReceptionist"));
+        columnSearchRoomId.setCellValueFactory(new PropertyValueFactory<>("idRoom"));
+        columnSearchNature.setCellValueFactory(new PropertyValueFactory<>("nature"));
+        columnSearchPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        columnSearchDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        //display the given list in the table
+        tableSearchTransaction.setItems(transactionList);
     }
 
     //RESERVE A ROOM

@@ -47,33 +47,6 @@ public class Receptionist extends Worker {
     }
 
     //METHODS
-    //MANAGE CLIENTS
-    public static boolean addClient(Client client){
-        boolean isClientAdded = DbConnector.addClient(client);
-        return isClientAdded;
-    }
-
-    public static void getClient(){}
-
-    public static boolean removeClient(String idClient){
-        boolean isClientRemoved =  DbConnector.removeClient(idClient);
-        return isClientRemoved;
-    }
-
-    public static void updateClient(Client client){
-        DbConnector.updateClient(client);
-    }
-
-    //MANAGE ROOM
-    public static void addRoom(Room room){}
-
-    public static void getRoom(){}
-
-    public static boolean setRoomAvailability(String roomId, boolean availability){
-        boolean isAvailabilityUpdated = DbConnector.setRoomAvailability(roomId, availability);
-        return isAvailabilityUpdated;
-    }
-
     //MANAGE TRANSACTIONS
     public static void addTransaction(){}
 
@@ -85,22 +58,6 @@ public class Receptionist extends Worker {
 
     public ObservableList<Room> getRoomsByTags(double minPrice, double maxPrice, String type, Boolean isAvailable) {
         return DbConnector.getRoomsByTags(minPrice, maxPrice, type, isAvailable);
-    }
-
-    public ObservableList<Client> getClientsById(String clientId) {
-        return DbConnector.getClientsById(clientId);
-    }
-
-    public ObservableList<Client> getClientsByFirstName(String firstName) {
-        return DbConnector.getClientsByFirstName(firstName);
-    }
-
-    public ObservableList<Client> getClientsByLastName(String lastName) {
-        return DbConnector.getClientsByLastName(lastName);
-    }
-
-    public ObservableList<Client> getClientsByEmail(String email) {
-        return DbConnector.getClientsByEmail(email);
     }
 
     public boolean isClientRegistered(String clientId) {

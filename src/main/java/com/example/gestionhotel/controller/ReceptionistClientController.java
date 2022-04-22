@@ -20,12 +20,6 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 public class ReceptionistClientController {
-
-    {
-        new DbConnector();
-    }
-
-    public static Receptionist receptionist = new Receptionist();
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -95,16 +89,6 @@ public class ReceptionistClientController {
     @FXML
     public Label modifyClientLabelInfo;
 
-
-    //GETTER
-    public Receptionist getReceptionist() {
-        return receptionist;
-    }
-
-    //SETTER
-    public static void setReceptionist(Receptionist newReceptionist) {
-        receptionist = newReceptionist;
-    }
 
     //CLIENT MANAGEMENT
     @FXML

@@ -2,7 +2,6 @@ package com.example.gestionhotel.controller;
 
 import com.example.gestionhotel.Main;
 import com.example.gestionhotel.model.DbConnector;
-import com.example.gestionhotel.model.Receptionist;
 import com.example.gestionhotel.model.Room;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,11 +22,6 @@ public class ReceptionistRoomController {
     public TableColumn <Room, String> columnRoomType;
     public TableColumn <Room, Double> columnRoomPrice;
 
-
-    {
-        new DbConnector();
-    }
-    @FXML private static Receptionist receptionist = new Receptionist();
     @FXML private TextField roomIdModifyEntry;
     @FXML private Label labelRoomAvailability;
     @FXML private ComboBox availabilityChoiceBox;
@@ -40,11 +34,6 @@ public class ReceptionistRoomController {
     @FXML private ComboBox boxAvailability;
     @FXML private ComboBox boxType;
 
-    //GETTER
-    public Receptionist getReceptionist() { return receptionist; }
-
-    //SETTER
-    public static void setReceptionist(Receptionist newReceptionist) { receptionist = newReceptionist; }
 
     //UPDATING ROOM AVAILABILITY
     @FXML
@@ -71,10 +60,10 @@ public class ReceptionistRoomController {
         String newAvailability = (String) availabilityChoiceBox.getValue();
         boolean isAvailabilityUpdated = false;
          if ( newAvailability.equals("Available") ){
-             isAvailabilityUpdated = receptionist.setRoomAvailability(roomId, true);
+             isAvailabilityUpdated = DbConnector.setRoomAvailability(roomId, true);
          }
          else if ( newAvailability.equals("Not available") ){
-             isAvailabilityUpdated = receptionist.setRoomAvailability(roomId, false);
+             isAvailabilityUpdated = DbConnector.setRoomAvailability(roomId, false);
          }
 
          if ( isAvailabilityUpdated ){
@@ -96,7 +85,7 @@ public class ReceptionistRoomController {
         Boolean isAvailable = Objects.equals(stringAvailability, "Available");
 
         //get the room list
-        ObservableList<Room> roomList = receptionist.getRoomsByTags(minPrice, maxPrice, type, isAvailable);
+        ObservableList<Room> roomList = DbConnector.getRoomsByTags(minPrice, maxPrice, type, isAvailable);
 
         //set values of the table's columns
         columnRoomId.setCellValueFactory(new PropertyValueFactory<>("id"));

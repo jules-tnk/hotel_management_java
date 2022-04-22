@@ -15,17 +15,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.kordamp.bootstrapfx.BootstrapFX;
 
 import java.io.IOException;
 
 public class LoginController {
-    public Label loginLabelInfo;
-    public Button loginButton;
-    {
-        new DbConnector();
-    }
-    @FXML public TextField userNameEntry;
-    @FXML public PasswordField passwordEntry;
+    //COMPONENTS OF THE VIEW
+    @FXML private Label loginLabelInfo;
+
+    @FXML private TextField userNameEntry;
+    @FXML private PasswordField passwordEntry;
 
     private Stage stage;
     private Scene scene;
@@ -33,32 +32,44 @@ public class LoginController {
 
     @FXML
     public void login(ActionEvent event){
+        //create a connection to the DB
+        DbConnector.connectDatabase();
+
+        //get the worker's information from the textFields
         String workerId = userNameEntry.getText();
         String password = passwordEntry.getText();
+
+        //check if the worker is registered in the database
         boolean isWorkerRegistered = DbConnector.isWorkerRegistered(workerId);
-        if ( isWorkerRegistered ){
-            String savedPassword = DbConnector.getWorkerPassword(workerId);
-            if ( password.equals(savedPassword) ){
-                String workerFunction = DbConnector.getWorkerFunction(workerId);
-                if ( workerFunction.equals("admin") ){
-                    Admin adminLoggingIn = new Admin(workerId);
-                    AdminController.setAdmin(adminLoggingIn);
-                    //set admin to others views
-                    switchToAdminView(event);
-                }
-                else if ( workerFunction.equals("receptionist") ){
-                    Receptionist receptionistLoggingIn = new Receptionist(workerId);
-                    ReceptionistClientController.setReceptionist(receptionistLoggingIn);
-                    ReceptionistRoomController.setReceptionist(receptionistLoggingIn);
-                    ReceptionistTransactionController.setReceptionist(receptionistLoggingIn);
-                    switchToReceptionistClientView(event);
-                }
-            }
-            else { loginLabelInfo.setText("Wrong password"); }
+        if ( !isWorkerRegistered ){
+            loginLabelInfo.setText("Worker not registered");
+            return;
         }
-        else { loginLabelInfo.setText("User not registered"); }
+
+        //check if the password corresponds to the one stored in the database
+        String savedPassword = DbConnector.getWorkerPassword(workerId);
+        if ( !password.equals(savedPassword) ){
+            loginLabelInfo.setText("Wrong password");
+            return;
+        }
+
+        //get the worker from the database
+        String workerFunction = DbConnector.getWorkerFunction(workerId);
+
+        if ( workerFunction.equals("admin") ){
+            Admin adminLoggingIn = new Admin(workerId);
+            AdminController.setAdmin(adminLoggingIn);
+            //set admin to others views
+            switchToAdminView(event);
+        }
+        else if ( workerFunction.equals("receptionist") ){
+            Receptionist receptionistLoggingIn = new Receptionist(workerId);
+            ReceptionistTransactionController.setReceptionist(receptionistLoggingIn);
+            switchToReceptionistClientView(event);
+        }
     }
 
+    //SWITCH TO OTHER VIEW AFTER LOGIN
     @FXML
     public void switchToAdminView(ActionEvent event) {
         try {
@@ -77,11 +88,12 @@ public class LoginController {
     @FXML
     public void switchToReceptionistClientView(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("receptionistClientView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("receptionistView.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(fxmlLoader.load());
             stage.setMaximized(true);
-            stage.setTitle("Clients management");
+            //scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+            stage.setTitle("Receptionist");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="672.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionhotel.controller.ReceptionistTransactionController">
+    <children>
+        <BorderPane layoutX="-1.0" layoutY="-1.0" prefHeight="465.0" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <HBox prefHeight="53.0" prefWidth="620.0" style="-fx-background-color: #20b2aa;" BorderPane.alignment="CENTER">
+                    <children>
+                        <Label alignment="BOTTOM_LEFT" prefHeight="33.0" prefWidth="187.0" text="     Saharai Hotel" textFill="WHITE">
+                            <font>
+                                <Font name="System Italic" size="24.0" />
+                            </font>
+                        </Label>
+                    </children></HBox>
+            </top>
+            <left>
+                <VBox prefHeight="347.0" prefWidth="112.0" style="-fx-background-color: #66CDAA;" BorderPane.alignment="CENTER">
+                    <children>
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#switchToClientManagementView" prefHeight="25.0" prefWidth="159.0" style="-fx-background-color: #66CDAA;" text="Client" textFill="#140505">
+                            <graphic>
+                                <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/1077114.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#switchToRoomManagementView" prefHeight="25.0" prefWidth="159.0" style="-fx-background-color: #66CDAA;" text="Room" textFill="#140505">
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/2863205.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="159.0" style="-fx-background-color: #66CDAA;" text="Transactions" textFill="#140505">
+                            <graphic>
+                                <ImageView fitHeight="26.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/879890.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children></VBox>
+            </left>
+            <center>
+                <VBox prefHeight="459.0" prefWidth="632.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <TabPane prefHeight="405.0" prefWidth="560.0" tabClosingPolicy="UNAVAILABLE">
+                            <tabs>
+                                <Tab text="Search">
+                                    <content>
+                              <AnchorPane>
+                                 <children>
+                                    <HBox prefHeight="318.0" prefWidth="560.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <VBox alignment="CENTER" prefHeight="541.0" prefWidth="491.0" spacing="5.0">
+                                             <children>
+                                                <HBox alignment="CENTER" prefHeight="320.0" prefWidth="491.0">
+                                                   <children>
+                                                                    <TextField fx:id="entrySearchClientId" prefHeight="29.0" prefWidth="93.0" promptText="id_client" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 2px 2px 2px;" />
+                                                                    <Button mnemonicParsing="false" onAction="#searchTransactionByClientId" text="search" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER">
+                                                   <children>
+                                                                    <TextField fx:id="entrySearchRoomId" prefHeight="29.0" prefWidth="94.0" promptText="id_room" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 2px 2px 2px;" />
+                                                                    <Button mnemonicParsing="false" onAction="#searchTransactionByRoomId" text="search" />
+                                                   </children>
+                                                </HBox>
+                                                <VBox alignment="CENTER">
+                                                   <children>
+                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date :" underline="true" wrappingWidth="52.083343505859375" />
+                                                                    <DatePicker fx:id="datePickerSearchStart" prefHeight="25.0" prefWidth="126.0" promptText="From" />
+                                                                    <DatePicker fx:id="datePickerSearchEnd" prefHeight="25.0" prefWidth="127.0" promptText="To" />
+                                                                    <Button mnemonicParsing="false" onAction="#searchTransactionByDate" text="search" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER">
+                                                   <children>
+                                                      <HBox alignment="CENTER">
+                                                         <children>
+                                                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Min Price :" underline="true" wrappingWidth="56.13671875" />
+                                                                          <ComboBox fx:id="boxSearchMinPrice" prefHeight="25.0" prefWidth="105.0">
+                                                                              <items>
+                                                                                  <FXCollections fx:factory="observableArrayList">
+                                                                                      <String fx:value="-3000" />
+                                                                                      <String fx:value="-2500" />
+                                                                                      <String fx:value="-2000" />
+                                                                                      <String fx:value="-1500" />
+                                                                                      <String fx:value="-1000" />
+                                                                                      <String fx:value="-500" />
+                                                                                      <String fx:value="500" />
+                                                                                      <String fx:value="1000" />
+                                                                                      <String fx:value="1500" />
+                                                                                      <String fx:value="2000" />
+                                                                                      <String fx:value="2500" />
+                                                                                      <String fx:value="3000" />
+                                                                                  </FXCollections>
+                                                                              </items>
+                                                                          </ComboBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER">
+                                                         <children>
+                                                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Max Price :" underline="true" />
+                                                                          <ComboBox fx:id="boxSearchMaxPrice" prefHeight="25.0" prefWidth="104.0">
+                                                                              <items>
+                                                                                  <FXCollections fx:factory="observableArrayList">
+                                                                                      <String fx:value="-3000" />
+                                                                                      <String fx:value="-2500" />
+                                                                                      <String fx:value="-2000" />
+                                                                                      <String fx:value="-1500" />
+                                                                                      <String fx:value="-1000" />
+                                                                                      <String fx:value="-500" />
+                                                                                      <String fx:value="500" />
+                                                                                      <String fx:value="1000" />
+                                                                                      <String fx:value="1500" />
+                                                                                      <String fx:value="2000" />
+                                                                                      <String fx:value="2500" />
+                                                                                      <String fx:value="3000" />
+                                                                                  </FXCollections>
+                                                                              </items>
+                                                                          </ComboBox>
+                                                         </children>
+                                                      </HBox>
+                                                                    <Button mnemonicParsing="false" onAction="#searchTransactionByPrice" text="search" />
+                                                   </children>
+                                                </VBox>
+                                                              <Button mnemonicParsing="false" onAction="#searchTransactionByTags" prefHeight="25.0" prefWidth="152.0" style="-fx-background-color: #20B2AA;" text="Search ALL" textFill="WHITE" underline="true" />
+                                             </children>
+                                          </VBox>
+                                                      <TableView fx:id="tableSearchTransaction" prefHeight="335.0" prefWidth="421.0">
+                                                          <columns>
+                                                <TableColumn fx:id="columnSearchIdTransaction" prefWidth="75.0" text="id transaction" />
+                                                <TableColumn fx:id="columnSearchIdReceptionist" prefWidth="75.0" text="id receptionist" />
+                                                              <TableColumn fx:id="columnSearchClientId" prefWidth="65.99993896484375" text="id_client" />
+                                                              <TableColumn fx:id="columnSearchRoomId" prefWidth="69.33331298828125" text="id_room" />
+                                                              <TableColumn fx:id="columnSearchDate" prefWidth="60.66668701171875" text="Date" />
+                                                              <TableColumn fx:id="columnSearchNature" minWidth="0.0" prefWidth="65.33328247070312" text="Nature" />
+                                                              <TableColumn fx:id="columnSearchPrice" prefWidth="66.66668701171875" text="Price" />
+                                                          </columns>
+                                                      </TableView>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                                    </content>
+                                </Tab>
+                                <Tab text="Reserve">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                            <children>
+                                    <HBox alignment="CENTER" layoutY="-1.0" prefHeight="318.0" prefWidth="560.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <VBox alignment="CENTER" prefHeight="318.0" prefWidth="187.0">
+                                             <children>
+                                                            <TextField fx:id="entryReserveClientId" prefHeight="29.0" prefWidth="93.0" promptText="id_client" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 2px 2px 2px;" />
+                                                              <TextField fx:id="entryReserveRoomId" prefHeight="29.0" prefWidth="93.0" promptText="id_room" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 2px 2px 2px;" />
+                                                              <Label fx:id="labelReserveTransaction" prefHeight="17.0" prefWidth="103.0" style="-fx-border-width: 0px 0px 2px; -fx-border-color: #8FBC8F;" />
+                                                              <Button mnemonicParsing="false" onAction="#addReservation" prefHeight="25.0" prefWidth="97.0" text="Add" />
+                                             </children>
+                                          </VBox>
+                                                        <VBox prefHeight="319.0" prefWidth="7.0" style="-fx-background-color: #20B2AA;" />
+                                          <VBox alignment="CENTER" prefHeight="319.0" prefWidth="336.0">
+                                             <children>
+                                                <VBox alignment="CENTER">
+                                                   <children>
+                                                      <HBox alignment="CENTER">
+                                                         <children>
+                                                                          <Label prefHeight="17.0" prefWidth="77.0" text="Min Price">
+                                                                              <font>
+                                                                                  <Font size="13.0" />
+                                                                              </font>
+                                                                          </Label>
+                                                                          <ComboBox fx:id="boxReserveMinPrice" prefWidth="150.0">
+                                                                              <items>
+                                                                                  <FXCollections fx:factory="observableArrayList">
+                                                                                      <String fx:value="500" />
+                                                                                      <String fx:value="1000" />
+                                                                                      <String fx:value="1500" />
+                                                                                      <String fx:value="2000" />
+                                                                                      <String fx:value="2500" />
+                                                                                      <String fx:value="3000" />
+                                                                                  </FXCollections>
+                                                                              </items>
+                                                                          </ComboBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER">
+                                                         <children>
+                                                                          <Label prefHeight="17.0" prefWidth="65.0" text="Max Price">
+                                                                              <font>
+                                                                                  <Font size="13.0" />
+                                                                              </font>
+                                                                          </Label>
+                                                                          <ComboBox fx:id="boxReserveMaxPrice" prefWidth="150.0">
+                                                                              <items>
+                                                                                  <FXCollections fx:factory="observableArrayList">
+                                                                                      <String fx:value="500" />
+                                                                                      <String fx:value="1000" />
+                                                                                      <String fx:value="1500" />
+                                                                                      <String fx:value="2000" />
+                                                                                      <String fx:value="2500" />
+                                                                                      <String fx:value="3000" />
+                                                                                  </FXCollections>
+                                                                              </items>
+                                                                          </ComboBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER">
+                                                         <children>
+                                                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Type :" wrappingWidth="60.09051513671875">
+                                                                              <font>
+                                                                                  <Font size="13.0" />
+                                                                              </font>
+                                                                          </Text>
+                                                                          <ComboBox fx:id="boxReserveType" prefWidth="150.0">
+                                                                              <items>
+                                                                                  <FXCollections fx:factory="observableArrayList">
+                                                                                      <String fx:value="simple" />
+                                                                                      <String fx:value="luxury" />
+                                                                                  </FXCollections>
+                                                                              </items>
+                                                                          </ComboBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <Button mnemonicParsing="false" onAction="#searchAvailableRoom" text="Search" />
+                                                   </children>
+                                                </VBox>
+                                                              <TableView fx:id="tableReserveRoom" prefHeight="224.0" prefWidth="336.0">
+                                                                  <columns>
+                                                                      <TableColumn fx:id="columnReserveRoomId" prefWidth="102.6666259765625" text="id_room" />
+                                                                      <TableColumn fx:id="columnReserveRoomType" prefWidth="107.333251953125" text="Type" />
+                                                                      <TableColumn fx:id="columnReserveRoomPrice" prefWidth="114.00003051757812" text="Price" />
+                                                                  </columns>
+                                                              </TableView>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                            </children>
+                              </AnchorPane>
+                                    </content>
+                                </Tab>
+                                <Tab text="Liberate">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                            <children>
+                                                <AnchorPane layoutY="10.0" prefHeight="309.0" prefWidth="193.0">
+                                                    <children>
+                                                        <TextField fx:id="entryLiberateRoomId" layoutX="26.0" layoutY="34.0" prefHeight="29.0" prefWidth="93.0" promptText="id_room" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 2px 2px 2px;" />
+                                                        <CheckBox fx:id="checkBoxLiberatePaid" layoutX="36.0" layoutY="90.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="85.0" text=" Paid" underline="true" />
+                                                        <Button layoutX="27.0" layoutY="149.0" mnemonicParsing="false" onAction="#addLiberation" prefHeight="25.0" prefWidth="117.0" text="Liberate" />
+                                                        <VBox layoutX="185.0" layoutY="-11.0" prefHeight="319.0" prefWidth="8.0" style="-fx-background-color: #66CDAA;" />
+                                          <Label fx:id="labelLiberateInfo" layoutX="13.0" layoutY="120.0" prefHeight="17.0" prefWidth="160.0" />
+                                                    </children>
+                                                </AnchorPane>
+                                                <HBox layoutX="-2.0" layoutY="-2.0" prefHeight="9.0" prefWidth="493.0" style="-fx-background-color: #66CDAA;" />
+                                                <TextField fx:id="entryLiberateClientId" layoutX="250.0" layoutY="35.0" prefHeight="29.0" prefWidth="93.0" promptText="id_client" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 2px 2px 2px;" />
+                                                <Button layoutX="372.0" layoutY="33.0" mnemonicParsing="false" onAction="#searchClientLastTransaction" prefHeight="25.0" prefWidth="76.0" text="search" />
+                                                <Label fx:id="labelLiberateRoomId" alignment="CENTER" layoutX="262.0" layoutY="133.0" prefHeight="21.0" prefWidth="146.0" style="-fx-border-color: #8FCD8F; -fx-border-width: 0px0px2px;" text="Room ">
+                                                    <font>
+                                                        <Font size="13.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label fx:id="labelLiberateDayCount" layoutX="263.0" layoutY="179.0" style="-fx-border-color: #8FCD8F; -fx-border-width: 0px 0px 2px;" text="Number of days  reserved :" />
+                                                <Label fx:id="labelLiberateTotalPrice" alignment="CENTER" layoutX="259.0" layoutY="225.0" prefHeight="21.0" prefWidth="153.0" style="-fx-border-color: #8FCB8F; -fx-border-width: 0px 0px 2px;" text="Total Price ">
+                                                    <font>
+                                                        <Font size="13.0" />
+                                                    </font>
+                                                </Label>
+                                                <ImageView fitHeight="18.0" fitWidth="23.0" layoutX="217.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../images/1077114.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </children>
+                              </AnchorPane>
+                                    </content>
+                                </Tab>
+                            </tabs>
+                        </TabPane>
+                    </children>
+                </VBox>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>

@@ -7,13 +7,13 @@ import java.sql.*;
 
 public class DbConnector {
     //ATTRIBUTES
-    private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private final String DATABASE_URL = "jdbc:mysql://localhost/hotelmanagementdb";
+    private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    private static final String DATABASE_URL = "jdbc:mysql://localhost/hotelmanagementdb";
 
-    private final String databaseUser = "root";
-    private final String databasePassword = "";
+    private static final String databaseUser = "root";
+    private static final String databasePassword = "";
 
-    private Connection connection = null;
+    private static Connection connection = null;
     private static Statement statement = null;
     private static String request;
     private static ResultSet resultSet;
@@ -40,11 +40,12 @@ public class DbConnector {
         return result;
     }
 
-    public DbConnector() {
+    public static void connectDatabase(){
         if ( connection == null ){
             try {
                 Class.forName(JDBC_DRIVER);
             } catch (ClassNotFoundException e) {
+
                 e.printStackTrace();
             }
 
@@ -56,6 +57,33 @@ public class DbConnector {
             }
         }
     }
+
+    public static void disconnectDatabase(){
+        try {
+            connection.close();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*public DbConnector() {
+        if ( connection == null ){
+            try {
+                Class.forName(JDBC_DRIVER);
+            } catch (ClassNotFoundException e) {
+
+                e.printStackTrace();
+            }
+
+            try {
+                connection = DriverManager.getConnection(DATABASE_URL, databaseUser, databasePassword);
+                statement = connection.createStatement();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }*/
 
     //MANAGE WORKERS
     public static Admin getAdmin(String adminId) {
@@ -434,7 +462,127 @@ public class DbConnector {
     public static ObservableList<Transaction> getTransactionsByDate(Date dateInf, Date dateSup) {
         String dateStart = String.valueOf(dateInf);
         String dateEnd = String.valueOf(dateSup);
-        request = String.format("SELECT * FROM transaction WHERE");
-        return null;//!!!!!!!!!!!!!!!!!!!!!!!
+        request = String.format("SELECT * FROM transaction WHERE date>='%s' and date <='%s'", dateStart, dateEnd);
+
+        resultSet = executeQueryRequest(request);
+
+        try {
+            int idTransaction ;
+            String idReceptionist;
+            String idClient;
+            String idRoom;
+            String nature;
+            double price;
+            Date date;
+            ObservableList<Transaction> transactionList = FXCollections.observableArrayList();
+            while (resultSet.next()){
+                idTransaction = resultSet.getInt("idTransaction");
+                idReceptionist = resultSet.getString("idReceptionist");
+                idClient =resultSet.getString("idClient");
+                idRoom = resultSet.getString("idRoom");
+                nature = resultSet.getString("nature");
+                price = resultSet.getDouble("price");
+                date = resultSet.getDate("date");
+                Transaction transaction = new Transaction(idTransaction, idClient, idReceptionist, idRoom, nature, date, price);
+                transactionList.add(transaction);
+            }
+            return transactionList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ObservableList<Transaction> getTransactionsByPrice(double minPrice, double maxPrice) {
+        request = String.format("SELECT * FROM transaction WHERE price<=%s AND price>=%s", maxPrice, minPrice);
+        resultSet = executeQueryRequest(request);
+
+        try {
+            int idTransaction ;
+            String idReceptionist;
+            String idClient;
+            String idRoom;
+            String nature;
+            double price;
+            Date date;
+            ObservableList<Transaction> transactionList = FXCollections.observableArrayList();
+            while (resultSet.next()){
+                idTransaction = resultSet.getInt("idTransaction");
+                idReceptionist = resultSet.getString("idReceptionist");
+                idClient =resultSet.getString("idClient");
+                idRoom = resultSet.getString("idRoom");
+                nature = resultSet.getString("nature");
+                price = resultSet.getDouble("price");
+                date = resultSet.getDate("date");
+                Transaction transaction = new Transaction(idTransaction, idClient, idReceptionist, idRoom, nature, date, price);
+                transactionList.add(transaction);
+            }
+            return transactionList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ObservableList<Transaction> getTransactionsByClientId(String clientId) {
+        request = String.format("SELECT * FROM transaction WHERE idClient=\"%s\"", clientId);
+        resultSet = executeQueryRequest(request);
+
+        try {
+            int idTransaction ;
+            String idReceptionist;
+            String idClient;
+            String idRoom;
+            String nature;
+            double price;
+            Date date;
+            ObservableList<Transaction> transactionList = FXCollections.observableArrayList();
+            while (resultSet.next()){
+                idTransaction = resultSet.getInt("idTransaction");
+                idReceptionist = resultSet.getString("idReceptionist");
+                idClient =resultSet.getString("idClient");
+                idRoom = resultSet.getString("idRoom");
+                nature = resultSet.getString("nature");
+                price = resultSet.getDouble("price");
+                date = resultSet.getDate("date");
+                Transaction transaction = new Transaction(idTransaction, idClient, idReceptionist, idRoom, nature, date, price);
+                transactionList.add(transaction);
+            }
+            return transactionList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ObservableList<Transaction> getTransactionsByRoomId(String roomId) {
+        request = String.format("SELECT * FROM transaction WHERE idRoom=\"%s\"", roomId);
+        resultSet = executeQueryRequest(request);
+
+        try {
+            int idTransaction ;
+            String idReceptionist;
+            String idClient;
+            String idRoom;
+            String nature;
+            double price;
+            Date date;
+            ObservableList<Transaction> transactionList = FXCollections.observableArrayList();
+            while (resultSet.next()){
+                idTransaction = resultSet.getInt("idTransaction");
+                idReceptionist = resultSet.getString("idReceptionist");
+                idClient =resultSet.getString("idClient");
+                idRoom = resultSet.getString("idRoom");
+                nature = resultSet.getString("nature");
+                price = resultSet.getDouble("price");
+                date = resultSet.getDate("date");
+                Transaction transaction = new Transaction(idTransaction, idClient, idReceptionist, idRoom, nature, date, price);
+                transactionList.add(transaction);
+            }
+            return transactionList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
