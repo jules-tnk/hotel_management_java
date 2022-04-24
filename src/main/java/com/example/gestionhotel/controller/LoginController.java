@@ -1,6 +1,7 @@
 package com.example.gestionhotel.controller;
 
 import com.example.gestionhotel.Main;
+import com.example.gestionhotel.controller.receptionistController.ReceptionistTransactionController;
 import com.example.gestionhotel.model.Admin;
 import com.example.gestionhotel.model.DbConnector;
 import com.example.gestionhotel.model.Receptionist;
@@ -10,12 +11,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.kordamp.bootstrapfx.BootstrapFX;
 
 import java.io.IOException;
 
@@ -58,8 +57,6 @@ public class LoginController {
 
         if ( workerFunction.equals("admin") ){
             Admin adminLoggingIn = new Admin(workerId);
-            AdminController.setAdmin(adminLoggingIn);
-            //set admin to others views
             switchToAdminView(event);
         }
         else if ( workerFunction.equals("receptionist") ){

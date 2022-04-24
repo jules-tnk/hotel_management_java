@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.gestionhotel.controller.AdminController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionhotel.controller.adminController.AdminSearchController">
+   <children>
+      <TabPane layoutX="72.0" layoutY="126.0" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+            <Tab text="Dashboard">
+                <content>
+                    <fx:include source="includes_for_admin/dashboard.fxml" />
+                </content>
+            </Tab>
+          <Tab text="Search">
+            <content>
+                <fx:include source="includes_for_admin/search.fxml" />
+            </content>
+          </Tab>
+          <Tab text="Receptionist">
+            <content>
+                <fx:include source="includes_for_admin/receptionistManagement.fxml" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
 </AnchorPane>

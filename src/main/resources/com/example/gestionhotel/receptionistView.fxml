@@ -11,17 +11,17 @@
         <tabs>
           <Tab text="Client">
             <content>
-              <fx:include source="clientManagement.fxml" />
+              <fx:include source="includes_for-receptionist/clientManagement.fxml" />
             </content>
           </Tab>
           <Tab text="Room">
             <content>
-              <fx:include source="roomManagement.fxml" />
+              <fx:include source="includes_for-receptionist/roomManagement.fxml" />
             </content>
           </Tab>
             <Tab text="transaction">
               <content>
-                <fx:include source="transactionManagement.fxml" />
+                <fx:include source="includes_for-receptionist/transactionManagement.fxml" />
               </content>
             </Tab>
         </tabs>

@@ -67,25 +67,21 @@ public class DbConnector {
         }
     }
 
-    /*public DbConnector() {
-        if ( connection == null ){
-            try {
-                Class.forName(JDBC_DRIVER);
-            } catch (ClassNotFoundException e) {
-
-                e.printStackTrace();
-            }
-
-            try {
-                connection = DriverManager.getConnection(DATABASE_URL, databaseUser, databasePassword);
-                statement = connection.createStatement();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }*/
 
     //MANAGE WORKERS
+    public static boolean addReceptionist(Receptionist receptionist) {
+        request = String.format("INSERT INTO worker (id, firstName, lastName, phoneNumber, email, birthDate, function, password) VALUES(\"%s\",\"%s\",\"%s\",%s,\"%s\",\"%s\", \"%s\", \"%s\")",
+                receptionist.getId(), receptionist.getFirstName(), receptionist.getLastName(), receptionist.getPhoneNumber(), receptionist.getEmail(), receptionist.getBirthDate(), receptionist.getFunction(), receptionist.getPassword());
+        int result = executeUpdateRequest(request);
+
+        return result == 1;
+    }
+
+    public static boolean removeReceptionist(String idReceptionist) {
+        request = String.format("DELETE FROM worker where id=\"%s\"", idReceptionist);
+        int result = executeUpdateRequest(request);
+        return result == 1;
+    }
     public static Admin getAdmin(String adminId) {
         request = String.format("SELECT * FROM worker WHERE id=\"%s\"", adminId);
         resultSet = executeQueryRequest(request);
@@ -226,77 +222,27 @@ public class DbConnector {
         return result == 1;
     }
 
-    public static void updateClient(Client client) {
-    }
-
     public static ObservableList<Client> getClientsById(String clientId) {
         request = String.format("SELECT * FROM client WHERE id=\"%s\"", clientId);
-        resultSet = executeQueryRequest(request);
-        try {
-            ObservableList<Client> clientList = FXCollections.observableArrayList();
-            while ( resultSet.next() ){
-                Client newClient = new Client();
-                newClient.setFirstName( resultSet.getString("firstName") );
-                newClient.setLastName( resultSet.getString("lastName") );
-                newClient.setId( resultSet.getString("id") );
-                newClient.setEmail( resultSet.getString("email") );
-                newClient.setPhoneNumber( resultSet.getInt("phoneNumber") );
-                newClient.setBirthDate( resultSet.getDate("birthDate") );
-                clientList.add(newClient);
-            }
-            return clientList;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return getClients();
     }
 
     public static ObservableList<Client> getClientsByFirstName(String firstName) {
         request = String.format("SELECT * FROM client WHERE firstName like '%s'", firstName);
-        resultSet = executeQueryRequest(request);
-        try {
-            ObservableList<Client> clientList = FXCollections.observableArrayList();
-            while ( resultSet.next() ){
-                Client newClient = new Client();
-                newClient.setFirstName( resultSet.getString("firstName") );
-                newClient.setLastName( resultSet.getString("lastName") );
-                newClient.setId( resultSet.getString("id") );
-                newClient.setEmail( resultSet.getString("email") );
-                newClient.setPhoneNumber( resultSet.getInt("phoneNumber") );
-                newClient.setBirthDate( resultSet.getDate("birthDate") );
-                clientList.add(newClient);
-            }
-            return clientList;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return getClients();
     }
 
     public static ObservableList<Client> getClientsByLastName(String lastName) {
         request = String.format("SELECT * FROM client WHERE lastName like '%s'", lastName);
-        resultSet = executeQueryRequest(request);
-        try {
-            ObservableList<Client> clientList = FXCollections.observableArrayList();
-            while ( resultSet.next() ){
-                Client newClient = new Client();
-                newClient.setFirstName( resultSet.getString("firstName") );
-                newClient.setLastName( resultSet.getString("lastName") );
-                newClient.setId( resultSet.getString("id") );
-                newClient.setEmail( resultSet.getString("email") );
-                newClient.setPhoneNumber( resultSet.getInt("phoneNumber") );
-                newClient.setBirthDate( resultSet.getDate("birthDate") );
-                clientList.add(newClient);
-            }
-            return clientList;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return getClients();
     }
 
     public static ObservableList<Client> getClientsByEmail(String email) {
         request = String.format("SELECT * FROM client WHERE email like '%s'", email);
+        return getClients();
+    }
+
+    private static ObservableList<Client> getClients() {
         resultSet = executeQueryRequest(request);
         try {
             ObservableList<Client> clientList = FXCollections.observableArrayList();
@@ -458,74 +404,25 @@ public class DbConnector {
         }
     }
 
-
     public static ObservableList<Transaction> getTransactionsByDate(Date dateInf, Date dateSup) {
         String dateStart = String.valueOf(dateInf);
         String dateEnd = String.valueOf(dateSup);
         request = String.format("SELECT * FROM transaction WHERE date>='%s' and date <='%s'", dateStart, dateEnd);
 
-        resultSet = executeQueryRequest(request);
-
-        try {
-            int idTransaction ;
-            String idReceptionist;
-            String idClient;
-            String idRoom;
-            String nature;
-            double price;
-            Date date;
-            ObservableList<Transaction> transactionList = FXCollections.observableArrayList();
-            while (resultSet.next()){
-                idTransaction = resultSet.getInt("idTransaction");
-                idReceptionist = resultSet.getString("idReceptionist");
-                idClient =resultSet.getString("idClient");
-                idRoom = resultSet.getString("idRoom");
-                nature = resultSet.getString("nature");
-                price = resultSet.getDouble("price");
-                date = resultSet.getDate("date");
-                Transaction transaction = new Transaction(idTransaction, idClient, idReceptionist, idRoom, nature, date, price);
-                transactionList.add(transaction);
-            }
-            return transactionList;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return getTransactions();
     }
 
     public static ObservableList<Transaction> getTransactionsByPrice(double minPrice, double maxPrice) {
         request = String.format("SELECT * FROM transaction WHERE price<=%s AND price>=%s", maxPrice, minPrice);
-        resultSet = executeQueryRequest(request);
-
-        try {
-            int idTransaction ;
-            String idReceptionist;
-            String idClient;
-            String idRoom;
-            String nature;
-            double price;
-            Date date;
-            ObservableList<Transaction> transactionList = FXCollections.observableArrayList();
-            while (resultSet.next()){
-                idTransaction = resultSet.getInt("idTransaction");
-                idReceptionist = resultSet.getString("idReceptionist");
-                idClient =resultSet.getString("idClient");
-                idRoom = resultSet.getString("idRoom");
-                nature = resultSet.getString("nature");
-                price = resultSet.getDouble("price");
-                date = resultSet.getDate("date");
-                Transaction transaction = new Transaction(idTransaction, idClient, idReceptionist, idRoom, nature, date, price);
-                transactionList.add(transaction);
-            }
-            return transactionList;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return getTransactions();
     }
 
     public static ObservableList<Transaction> getTransactionsByClientId(String clientId) {
         request = String.format("SELECT * FROM transaction WHERE idClient=\"%s\"", clientId);
+        return getTransactions();
+    }
+
+    private static ObservableList<Transaction> getTransactions() {
         resultSet = executeQueryRequest(request);
 
         try {
@@ -557,32 +454,7 @@ public class DbConnector {
 
     public static ObservableList<Transaction> getTransactionsByRoomId(String roomId) {
         request = String.format("SELECT * FROM transaction WHERE idRoom=\"%s\"", roomId);
-        resultSet = executeQueryRequest(request);
-
-        try {
-            int idTransaction ;
-            String idReceptionist;
-            String idClient;
-            String idRoom;
-            String nature;
-            double price;
-            Date date;
-            ObservableList<Transaction> transactionList = FXCollections.observableArrayList();
-            while (resultSet.next()){
-                idTransaction = resultSet.getInt("idTransaction");
-                idReceptionist = resultSet.getString("idReceptionist");
-                idClient =resultSet.getString("idClient");
-                idRoom = resultSet.getString("idRoom");
-                nature = resultSet.getString("nature");
-                price = resultSet.getDouble("price");
-                date = resultSet.getDate("date");
-                Transaction transaction = new Transaction(idTransaction, idClient, idReceptionist, idRoom, nature, date, price);
-                transactionList.add(transaction);
-            }
-            return transactionList;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return getTransactions();
     }
+
 }
