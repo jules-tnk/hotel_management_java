@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.kordamp.bootstrapfx.BootstrapFX;
 
 import java.io.IOException;
 
@@ -14,7 +13,6 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("LoginView.fxml"));
         //FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("receptionistView.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        //scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
         stage.setMaximized(true);
         stage.setTitle("LOGIN");
         stage.setScene(scene);

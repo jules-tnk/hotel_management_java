@@ -27,7 +27,6 @@ public class LoginController {
 
     private Stage stage;
     private Scene scene;
-    private Parent root;
 
     @FXML
     public void login(ActionEvent event){
@@ -89,7 +88,6 @@ public class LoginController {
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(fxmlLoader.load());
             stage.setMaximized(true);
-            //scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
             stage.setTitle("Receptionist");
             stage.setScene(scene);
             stage.show();

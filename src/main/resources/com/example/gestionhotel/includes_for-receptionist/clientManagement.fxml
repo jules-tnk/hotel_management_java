@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="753.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionhotel.controller.receptionistController.ReceptionistClientController">
-    <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <TabPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
             <Tab text="Add">
                 <content>
@@ -33,7 +32,7 @@
                                                                             <Image url="@../images/1077114.png" />
                                                                         </image>
                                                                     </ImageView>
-                                                                    <TextField fx:id="firstNameEntry" prefHeight="46.0" prefWidth="163.0" promptText="First Name" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 0px 0px 2px;">
+                                                                    <TextField fx:id="firstNameEntry" prefHeight="46.0" prefWidth="163.0" promptText="First Name" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px;">
                                                                         <font>
                                                                             <Font size="20.0" />
                                                                         </font>
@@ -47,7 +46,7 @@
                                                                             <Image url="@../images/call.png" />
                                                                         </image>
                                                                     </ImageView>
-                                                                    <TextField fx:id="phoneEntry" prefHeight="46.0" prefWidth="161.0" promptText="Phone Number" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 0px 0px 2px;">
+                                                                    <TextField fx:id="phoneEntry" prefHeight="46.0" prefWidth="161.0" promptText="Phone Number" styleClass="txtField">
                                                                         <font>
                                                                             <Font size="20.0" />
                                                                         </font>
@@ -61,7 +60,7 @@
                                                                             <Image url="@../images/identification-card.png" />
                                                                         </image>
                                                                     </ImageView>
-                                                                    <TextField fx:id="idClientEntry" prefHeight="46.0" prefWidth="171.0" promptText="CIN" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 0px 0px 2px;">
+                                                                    <TextField fx:id="idClientEntry" prefHeight="46.0" prefWidth="171.0" promptText="CIN" styleClass="txtField">
                                                                         <font>
                                                                             <Font size="20.0" />
                                                                         </font>
@@ -76,7 +75,7 @@
                                                 <children>
                                                     <VBox spacing="20.0">
                                                         <children>
-                                                            <TextField fx:id="lastNameEntry" prefHeight="19.0" prefWidth="148.0" promptText="Last Name" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px; -fx-border-color: #8FBC8F;">
+                                                            <TextField fx:id="lastNameEntry" prefHeight="19.0" prefWidth="148.0" promptText="Last Name" styleClass="txtField">
                                                                 <font>
                                                                     <Font size="20.0" />
                                                                 </font>
@@ -88,14 +87,14 @@
                                                                             <Image url="@../images/725643.png" />
                                                                         </image>
                                                                     </ImageView>
-                                                                    <TextField fx:id="emailEntry" prefHeight="19.0" prefWidth="151.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 0px 0px 2px;">
+                                                                    <TextField fx:id="emailEntry" prefHeight="19.0" prefWidth="151.0" promptText="Email" styleClass="txtField">
                                                                         <font>
                                                                             <Font size="20.0" />
                                                                         </font>
                                                                     </TextField>
                                                                 </children>
                                                             </HBox>
-                                                            <DatePicker fx:id="datePickerBirthDate" prefHeight="43.0" prefWidth="174.0" promptText="Birth date : dd/mm/yyyy" />
+                                                            <DatePicker fx:id="datePickerBirthDate" prefHeight="43.0" prefWidth="174.0" promptText="Birth date : dd/mm/yyyy" styleClass="txtField" />
                                                         </children>
                                                     </VBox>
                                                 </children>
@@ -108,14 +107,10 @@
                                     <font>
                                        <Font size="20.0" />
                                     </font></Label>
-                                            <Button fx:id="addClientButton" mnemonicParsing="false" onAction="#addClient" prefHeight="35.0" prefWidth="220.0" text="Add Client">
+                                            <Button fx:id="addClientButton" mnemonicParsing="false" onAction="#addClient" prefHeight="35.0" prefWidth="220.0" text="Add Client" textFill="WHITE">
                                     <font>
                                        <Font size="20.0" />
-                                    </font>
-                                    <styleClass>
-                                       <String fx:value="btn-info" />
-                                       <String fx:value="h3" />
-                                    </styleClass></Button>
+                                    </font></Button>
                                         </children>
                                     </VBox>
                                 </children>
@@ -177,7 +172,7 @@
                                                                             <Image url="@../images/1077114.png" />
                                                                         </image>
                                                                     </ImageView>
-                                                                    <TextField fx:id="firstNameUpdateEntry" prefHeight="19.0" prefWidth="151.0" promptText="First Name" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 0px 0px 2px;">
+                                                                    <TextField fx:id="firstNameUpdateEntry" prefHeight="19.0" prefWidth="151.0" promptText="First Name" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px;">
                                                                         <font>
                                                                             <Font size="20.0" />
                                                                         </font>
@@ -191,7 +186,7 @@
                                                                             <Image url="@../images/call.png" />
                                                                         </image>
                                                                     </ImageView>
-                                                                    <TextField fx:id="phoneUpdateEntry" prefHeight="19.0" prefWidth="151.0" promptText="Phone Number" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 0px 0px 2px;">
+                                                                    <TextField fx:id="phoneUpdateEntry" prefHeight="19.0" prefWidth="151.0" promptText="Phone Number" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px;">
                                                                         <font>
                                                                             <Font size="20.0" />
                                                                         </font>
@@ -205,7 +200,7 @@
                                                                             <Image url="@../images/identification-card.png" />
                                                                         </image>
                                                                     </ImageView>
-                                                                    <TextField fx:id="idClientUpdateEntry" prefHeight="19.0" prefWidth="151.0" promptText="id_client" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 0px 0px 2px;">
+                                                                    <TextField fx:id="idClientUpdateEntry" prefHeight="19.0" prefWidth="151.0" promptText="id_client" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px;">
                                                                         <font>
                                                                             <Font size="20.0" />
                                                                         </font>
@@ -220,7 +215,7 @@
                                                 <children>
                                                     <VBox spacing="20.0">
                                                         <children>
-                                                            <TextField fx:id="lastNameUpdateEntry" prefHeight="19.0" prefWidth="151.0" promptText="Last Name" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 0px 0px 2px;">
+                                                            <TextField fx:id="lastNameUpdateEntry" prefHeight="19.0" prefWidth="151.0" promptText="Last Name" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px;">
                                                                 <font>
                                                                     <Font size="20.0" />
                                                                 </font>
@@ -232,7 +227,7 @@
                                                                             <Image url="@../images/725643.png" />
                                                                         </image>
                                                                     </ImageView>
-                                                                    <TextField fx:id="emailUpdateEntry" prefHeight="19.0" prefWidth="151.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 0px 0px 2px;">
+                                                                    <TextField fx:id="emailUpdateEntry" prefHeight="19.0" prefWidth="151.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px;">
                                                                         <font>
                                                                             <Font size="20.0" />
                                                                         </font>
@@ -249,7 +244,7 @@
                                     <VBox alignment="CENTER" spacing="30.0">
                                         <children>
                                             <Label fx:id="modifyClientLabelInfo" prefHeight="17.0" prefWidth="238.0" textAlignment="CENTER" />
-                                            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="143.0" text="Modify client">
+                                            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="143.0" text="Modify client" textFill="WHITE">
                                     <font>
                                        <Font size="20.0" />
                                     </font></Button>
@@ -271,58 +266,54 @@
                                         <children>
                                             <HBox alignment="CENTER">
                                                 <children>
-                                                    <TextField fx:id="idClientSearchEntry" promptText="client id" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 0px 0px 2px;">
+                                                    <TextField fx:id="idClientSearchEntry" promptText="client id" styleClass="txtField">
                                                         <font>
                                                             <Font size="20.0" />
                                                         </font>
                                                     </TextField>
-                                                    <Button mnemonicParsing="false" onAction="#searchClientById" prefHeight="25.0" prefWidth="158.0" text="Search">
-                                          <styleClass>
-                                             <String fx:value="btn-info" />
-                                             <String fx:value="h3" />
-                                          </styleClass></Button>
+                                                    <Button mnemonicParsing="false" onAction="#searchClientById" prefHeight="25.0" prefWidth="158.0" text="Search" textFill="WHITE">
+                                          <font>
+                                             <Font size="20.0" />
+                                          </font></Button>
                                                 </children>
                                             </HBox>
                                             <HBox alignment="CENTER">
                                                 <children>
-                                                    <TextField fx:id="firstNameSearchEntry" promptText="First Name" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 0px 0px 2px;">
+                                                    <TextField fx:id="firstNameSearchEntry" promptText="First Name" styleClass="txtField">
                                                         <font>
                                                             <Font size="20.0" />
                                                         </font>
                                                     </TextField>
-                                                    <Button mnemonicParsing="false" onAction="#searchClientByFirstName" prefHeight="25.0" prefWidth="156.0" text="Search">
-                                          <styleClass>
-                                             <String fx:value="btn-info" />
-                                             <String fx:value="h3" />
-                                          </styleClass></Button>
+                                                    <Button mnemonicParsing="false" onAction="#searchClientByFirstName" prefHeight="25.0" prefWidth="156.0" text="Search" textFill="WHITE">
+                                          <font>
+                                             <Font size="20.0" />
+                                          </font></Button>
                                                 </children>
                                             </HBox>
                                             <HBox alignment="CENTER">
                                                 <children>
-                                                    <TextField fx:id="lastNameSearchEntry" promptText="Last Name" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 0px 0px 2px;">
+                                                    <TextField fx:id="lastNameSearchEntry" promptText="Last Name" styleClass="txtField">
                                                         <font>
                                                             <Font size="20.0" />
                                                         </font>
                                                     </TextField>
-                                                    <Button mnemonicParsing="false" onAction="#searchClientByLastName" prefHeight="25.0" prefWidth="152.0" text="Search">
-                                          <styleClass>
-                                             <String fx:value="btn-info" />
-                                             <String fx:value="h3" />
-                                          </styleClass></Button>
+                                                    <Button mnemonicParsing="false" onAction="#searchClientByLastName" prefHeight="25.0" prefWidth="152.0" text="Search" textFill="WHITE">
+                                          <font>
+                                             <Font size="20.0" />
+                                          </font></Button>
                                                 </children>
                                             </HBox>
                                             <HBox alignment="CENTER">
                                                 <children>
-                                                    <TextField fx:id="emailSearchEntry" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #8FBC8F; -fx-border-width: 0px 0px 2px;">
+                                                    <TextField fx:id="emailSearchEntry" promptText="Email" styleClass="txtField">
                                                         <font>
                                                             <Font size="20.0" />
                                                         </font>
                                                     </TextField>
-                                                    <Button mnemonicParsing="false" onAction="#searchClientByEmail" prefHeight="25.0" prefWidth="95.0" text="Search">
-                                          <styleClass>
-                                             <String fx:value="btn-info" />
-                                             <String fx:value="h3" />
-                                          </styleClass></Button>
+                                                    <Button mnemonicParsing="false" onAction="#searchClientByEmail" prefHeight="25.0" prefWidth="154.0" text="Search" textFill="WHITE">
+                                          <font>
+                                             <Font size="20.0" />
+                                          </font></Button>
                                                 </children>
                                             </HBox>
                                         </children>

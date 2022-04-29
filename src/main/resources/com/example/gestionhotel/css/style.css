@@ -1,0 +1,11 @@
+.txtField{
+    -fx-background-color: transparent;
+    -fx-border-color: #0598ff;
+    -fx-border-width: 0px 0px 2px;
+}
+
+.button{
+    -fx-background-color: #0598ff;
+    -fx-background-color: #0598ff;
+    /*-fx-text-fill: #311c09;*/
+}

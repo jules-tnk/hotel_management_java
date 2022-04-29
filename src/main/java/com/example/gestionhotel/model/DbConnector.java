@@ -56,6 +56,7 @@ public class DbConnector {
                 e.printStackTrace();
             }
         }
+        System.out.println("Connected...");
     }
 
     public static void disconnectDatabase(){
@@ -82,6 +83,7 @@ public class DbConnector {
         int result = executeUpdateRequest(request);
         return result == 1;
     }
+
     public static Admin getAdmin(String adminId) {
         request = String.format("SELECT * FROM worker WHERE id=\"%s\"", adminId);
         resultSet = executeQueryRequest(request);
@@ -422,6 +424,11 @@ public class DbConnector {
         return getTransactions();
     }
 
+    public static ObservableList<Transaction> getTransactionsByRoomId(String roomId) {
+        request = String.format("SELECT * FROM transaction WHERE idRoom=\"%s\"", roomId);
+        return getTransactions();
+    }
+
     private static ObservableList<Transaction> getTransactions() {
         resultSet = executeQueryRequest(request);
 
@@ -451,10 +458,4 @@ public class DbConnector {
             return null;
         }
     }
-
-    public static ObservableList<Transaction> getTransactionsByRoomId(String roomId) {
-        request = String.format("SELECT * FROM transaction WHERE idRoom=\"%s\"", roomId);
-        return getTransactions();
-    }
-
 }
