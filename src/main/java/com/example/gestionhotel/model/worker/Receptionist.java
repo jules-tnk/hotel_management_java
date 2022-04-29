@@ -3,7 +3,6 @@ package com.example.gestionhotel.model.worker;
 import com.example.gestionhotel.model.DbConnector;
 import com.example.gestionhotel.model.Room;
 import com.example.gestionhotel.model.Transaction;
-import com.example.gestionhotel.model.Worker;
 import javafx.collections.ObservableList;
 
 import java.sql.Date;
