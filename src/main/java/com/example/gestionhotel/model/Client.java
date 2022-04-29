@@ -1,4 +1,6 @@
 package com.example.gestionhotel.model;
+import com.example.gestionhotel.model.abstractClass.Person;
+
 import java.sql.*;
 
 public class Client extends Person {

@@ -1,7 +1,7 @@
 package com.example.gestionhotel.controller.adminController;
 
 import com.example.gestionhotel.model.DbConnector;
-import com.example.gestionhotel.model.Receptionist;
+import com.example.gestionhotel.model.worker.Receptionist;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;

@@ -1,21 +1,17 @@
 package com.example.gestionhotel.controller.receptionistController;
 
-import com.example.gestionhotel.Main;
 import com.example.gestionhotel.model.DbConnector;
-import com.example.gestionhotel.model.Receptionist;
+import com.example.gestionhotel.model.worker.Receptionist;
 import com.example.gestionhotel.model.Room;
 import com.example.gestionhotel.model.Transaction;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 

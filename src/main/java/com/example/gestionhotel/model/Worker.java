@@ -1,5 +1,7 @@
 package com.example.gestionhotel.model;
 
+import com.example.gestionhotel.model.abstractClass.Person;
+
 import java.sql.Date;
 
 public class Worker extends Person {

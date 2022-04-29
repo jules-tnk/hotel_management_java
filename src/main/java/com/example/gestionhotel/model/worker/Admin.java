@@ -1,4 +1,7 @@
-package com.example.gestionhotel.model;
+package com.example.gestionhotel.model.worker;
+
+import com.example.gestionhotel.model.DbConnector;
+import com.example.gestionhotel.model.Worker;
 
 import java.sql.Date;
 

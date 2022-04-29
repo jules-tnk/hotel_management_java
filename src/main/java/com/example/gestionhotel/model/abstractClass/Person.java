@@ -1,4 +1,4 @@
-package com.example.gestionhotel.model;
+package com.example.gestionhotel.model.abstractClass;
 import java.sql.*;
 
 public abstract class Person {

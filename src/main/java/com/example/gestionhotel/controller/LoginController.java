@@ -2,14 +2,13 @@ package com.example.gestionhotel.controller;
 
 import com.example.gestionhotel.Main;
 import com.example.gestionhotel.controller.receptionistController.ReceptionistTransactionController;
-import com.example.gestionhotel.model.Admin;
+import com.example.gestionhotel.model.worker.Admin;
 import com.example.gestionhotel.model.DbConnector;
-import com.example.gestionhotel.model.Receptionist;
+import com.example.gestionhotel.model.worker.Receptionist;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;

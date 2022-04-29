@@ -1,5 +1,9 @@
-package com.example.gestionhotel.model;
+package com.example.gestionhotel.model.worker;
 
+import com.example.gestionhotel.model.DbConnector;
+import com.example.gestionhotel.model.Room;
+import com.example.gestionhotel.model.Transaction;
+import com.example.gestionhotel.model.Worker;
 import javafx.collections.ObservableList;
 
 import java.sql.Date;
@@ -48,14 +52,6 @@ public class Receptionist extends Worker {
 
     //METHODS
     //MANAGE TRANSACTIONS
-    public static void addTransaction(){}
-
-    public static void getTransaction(){}
-
-    public static void removeTransaction(){}
-
-    public static void updateTransaction(){}
-
     public ObservableList<Room> getRoomsByTags(double minPrice, double maxPrice, String type, Boolean isAvailable) {
         return DbConnector.getRoomsByTags(minPrice, maxPrice, type, isAvailable);
     }

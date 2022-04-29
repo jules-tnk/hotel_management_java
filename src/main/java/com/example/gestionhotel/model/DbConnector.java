@@ -1,5 +1,7 @@
 package com.example.gestionhotel.model;
 
+import com.example.gestionhotel.model.worker.Admin;
+import com.example.gestionhotel.model.worker.Receptionist;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
